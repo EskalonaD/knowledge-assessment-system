@@ -1,0 +1,10 @@
+.ff {
+  &:hover{}
+}
+
+.header {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  padding: 35px;
+}

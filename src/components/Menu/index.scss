@@ -1,0 +1,13 @@
+.menu-container {
+  display: flex;
+}
+
+.menuButton {
+  height: 50px;
+  & :hover {
+    background-color: #f00;
+  }
+}
+.active {
+  background-color: #0f0;
+}

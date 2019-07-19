@@ -5,6 +5,7 @@ import Header from "@containers/Header";
 import Slider from "@containers/Slider";
 import MainPage from "@containers/MainPage";
 import Contacts from "@containers/Contacts";
+import Footer from "@containers/Footer";
 
 export default class App extends Component {
   render() {
@@ -16,6 +17,7 @@ export default class App extends Component {
           <Route exact path="/" component={MainPage} />
           <Route exact path="/contacts" component={Contacts} />
         </Switch>
+        <Footer />
       </Router>
     );
   }

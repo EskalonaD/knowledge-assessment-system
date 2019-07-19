@@ -3,6 +3,6 @@ import styles from "./index.scss";
 
 export default class Slider extends Component {
   render() {
-    return <section className={styles.wrapper} />;
+    return <section className={styles.slider__wrapper} />;
   }
 }

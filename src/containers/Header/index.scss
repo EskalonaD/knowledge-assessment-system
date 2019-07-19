@@ -1,10 +1,12 @@
 .ff {
   &:hover{}
 }
+* {
+  border: 0.1px solid #000;
+}
 
 .header {
   display: flex;
-  flex-direction: row-reverse;
   justify-content: space-between;
   padding: 35px;
 }

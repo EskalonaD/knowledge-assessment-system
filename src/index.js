@@ -1,15 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import styles from "./index.scss";
 
-import Header from "./Header";
+import App from "./App";
 
 const Index = () => {
-  return (
-    <div className={styles.hi}>
-      <Header />
-    </div>
-  );
+  return <App />;
 };
 
 ReactDOM.render(<Index />, document.getElementById("root"));

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import "./globalStyles/index.css";
 
 import Header from "@containers/Header";
 import Slider from "@containers/Slider";

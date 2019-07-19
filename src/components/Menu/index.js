@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 // import MenuButton from "../MenuButton";
 
 const MENU_LIST = [
+  { name: `На главную`, url: `/` },
   { name: `Тесты`, url: `/tests` },
   { name: `Статистика`, url: `/statictics` },
   { name: `Контакты`, url: `/contacts` },
@@ -20,8 +21,8 @@ export default class Menu extends Component {
             <NavLink
               key={el.name}
               to={el.url}
-              className={styles.MenuButton}
-              activeClassName={styles.active}
+              className={styles.menuButton}
+              activeClassName={el.url === "/" ? `` : styles.menuButtonActive}
             >
               {el.name}
             </NavLink>

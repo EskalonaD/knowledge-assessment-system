@@ -1,0 +1,12 @@
+[
+  {
+    "name": "js",
+    "questions": [
+      {
+        "question": "Какой из методов не принадлежит к методам строки?",
+        "possibleAnswers": ["indexOf", "slice", "splice", "concat"],
+        "rightAnswers": []
+      }
+    ]
+  }
+]

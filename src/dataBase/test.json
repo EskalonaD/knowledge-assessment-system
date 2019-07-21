@@ -4,9 +4,18 @@
     "questions": [
       {
         "question": "Какой из методов не принадлежит к методам строки?",
-        "possibleAnswers": ["indexOf", "slice", "splice", "concat"],
-        "rightAnswers": []
+        "possibleAnswers": ["indexOf", "slice", "splice", "concat"]
+      },
+      {
+        "question": "Как отцентровать элемент по высоте и ширине?",
+        "possibleAnswers": [
+          "margin: auto auto auto auto;",
+          "text-align: center; vertical-align: center;",
+          "margin: 0 auto; vertical-align: middle;",
+          "У родительского блока: display: flex; justify-content: center; align-items: center;"
+        ]
       }
-    ]
+    ],
+    "rightAnswers": [3, 4]
   }
 ]

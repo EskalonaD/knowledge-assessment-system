@@ -17,5 +17,19 @@
       }
     ],
     "rightAnswers": [3, 4]
+  },
+  {
+    "name": "html",
+    "questions":[
+      {
+        "question": "Какой из элементов не является html5 тегом?",
+        "possibleAnswers": ["nav", "flex", "section", "main"]
+      },
+      {
+        "question": "Какой атрибут наиболее желателен в теге <img>?",
+        "possibleAnswers": ["alt", "src", "href", "script"]
+      }
+    ],
+    "rightAnswers":[2, 1]
   }
 ]

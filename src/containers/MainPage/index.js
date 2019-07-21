@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import styles from "./index.scss";
+import ToolsContainer from "@containers/ToolsContainer";
 export default class MainPage extends Component {
   render() {
     return (
-      <div>
-        <div className={styles.tools_container}>
-          <section>Breadcrumbs</section>
-          <section>Поиск</section>
-        </div>
+      <main>
+        <ToolsContainer />
         MainPage;
-      </div>
+      </main>
     );
   }
 }

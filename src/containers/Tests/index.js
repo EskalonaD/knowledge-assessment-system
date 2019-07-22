@@ -2,14 +2,15 @@ import React, { Component } from "react";
 import styles from "./index.scss";
 import ToolsContainer from "@containers/ToolsContainer";
 import data from "../../dataBase/test.json";
+import Test from "@containers/Test";
 
-export default class index extends Component {
+export default class Tests extends Component {
   state = {
     selectedTest: null
   };
 
   render() {
-    console.log(data);
+    // console.log(data);
     return (
       <main>
         <ToolsContainer />
@@ -29,9 +30,23 @@ export default class index extends Component {
             })}
           </div>
         ) : (
-          <div>Test1</div>
+          <Test test={data[this.state.selectedTest]}/>
         )}
       </main>
     );
+  }
+
+//   componentDidUpdate(prevProps, prevState){
+//     this.state.selectedTest === prevState.state.selectedTest 
+//     setState ( {defaults})
+// }
+
+
+// Return state to initial value after click on "Тесты" in menu;
+  componentDidUpdate(prevProps, prevState) {
+    console.log(this.state);
+    if(this.state.selectedTest === prevState.selectedTest) this.setState({
+      selectedTest: null
+    });
   }
 }

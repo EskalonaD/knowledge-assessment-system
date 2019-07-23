@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styles from "./index.scss";
 import ToolsContainer from "@containers/ToolsContainer";
 import data from "../../dataBase/test.json";
-import Test from "@containers/Test";
+import TestContainer from "@containers/TestContainer";
 
 export default class Tests extends Component {
   state = {
@@ -30,7 +30,7 @@ export default class Tests extends Component {
             })}
           </div>
         ) : (
-          <Test test={data[this.state.selectedTest]} />
+          <TestContainer test={data[this.state.selectedTest]} />
         )}
       </main>
     );

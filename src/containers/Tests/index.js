@@ -30,23 +30,26 @@ export default class Tests extends Component {
             })}
           </div>
         ) : (
-          <Test test={data[this.state.selectedTest]}/>
+          <Test test={data[this.state.selectedTest]} />
         )}
       </main>
     );
   }
 
-//   componentDidUpdate(prevProps, prevState){
-//     this.state.selectedTest === prevState.state.selectedTest 
-//     setState ( {defaults})
-// }
+  //   componentDidUpdate(prevProps, prevState){
+  //     this.state.selectedTest === prevState.state.selectedTest
+  //     setState ( {defaults})
+  // }
 
-
-// Return state to initial value after click on "Тесты" in menu;
+  // Return state to initial value after click on "Тесты" in menu;
   componentDidUpdate(prevProps, prevState) {
     console.log(this.state);
-    if(this.state.selectedTest === prevState.selectedTest) this.setState({
-      selectedTest: null
-    });
+    if (
+      this.state.selectedTest === prevState.selectedTest &&
+      prevState.selectedTest !== null
+    )
+      this.setState({
+        selectedTest: null
+      });
   }
 }

@@ -11,7 +11,7 @@ export default class Test extends Component {
         />
         {this.props.test.questions[this.props.step].possibleAnswers.map(el => (
           <label>
-            <input type="radio" name="answer" />
+            <input type="radio" name="answer" /> {/* fix bug with same checked value at "next" question */}
             {el}
           </label>
         ))}

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Heading from "@components/Heading";
 
 export default class Test extends Component {
   render() {
@@ -10,11 +11,12 @@ export default class Test extends Component {
         />
         {this.props.test.questions[this.props.step].possibleAnswers.map(el => (
           <label>
-            <input type="radiobutton" name="answer" />
+            <input type="radio" name="answer" />
             {el}
           </label>
         ))}
         {/* <label><input type=radiobutton name=answer} />{this.props.test.questions[this.props.step].possibleAnswers.}</label> */}
+        <button onClick={this.props.nextStep}>Следующий вопрос</button>
       </section>
     );
   }

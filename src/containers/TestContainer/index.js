@@ -8,7 +8,9 @@ import Test from "@containers/Test"; // check if its component should be in @com
 export default class TestContainer extends Component {
   state = {
     startTest: false,
-    step: 0
+    endTest: false,
+    step: 0,
+    answerCollector: [] // test it;
   };
 
   // startTest = function() {
@@ -16,15 +18,18 @@ export default class TestContainer extends Component {
   // }.bind(this);
 
   startTest = () => this.setState({ startTest: true });
+  nextStep = () => this.state.step + 1 < this.props.test.questions.length ? this.setState({step: this.state.step + 1}) : this.setState({endTest: true});
 
   render() {
     return (
       <section>
         <Heading hNumber="2" content={this.props.test.name} />
-        {this.state.startTest === false ? (
+        {this.state.endTest ? (
+        <div>Заглушка для страницы конца теста</div>
+        ) : this.state.startTest === false ? (
           <TestStartPage startTest={this.startTest} />
         ) : (
-          <Test />
+          <Test test={this.props.test} step={this.state.step} nextStep={this.nextStep}/>
         )}
       </section>
     );

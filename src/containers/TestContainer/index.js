@@ -29,7 +29,7 @@ export default class TestContainer extends Component {
         ) : this.state.startTest === false ? (
           <TestStartPage startTest={this.startTest} />
         ) : (
-          <Test test={this.props.test} step={this.state.step} nextStep={this.nextStep}/>
+          <Test test={this.props.test} step={this.state.step} nextStep={this.nextStep} key={this.state.step}/>
         )}
       </section>
     );

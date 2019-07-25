@@ -10,10 +10,11 @@ export default class Test extends Component {
   //   this.props.nextStep();
   //   console.log(this.state);
   // }
-  counter = ``;
+  // counter = ``;
 
   render() {
-    // console.log(`counter ${counter}`)
+    let counter = ``;
+    console.log(`counter ${counter}`)
     return (
       <section>
         <Heading
@@ -22,12 +23,12 @@ export default class Test extends Component {
         />
         {this.props.test.questions[this.props.step].possibleAnswers.map((el, i) => (
           <label>
-            <input type="radio" name={`answer`} onClick={() => this.counter = i}/> {/* fix bug with same checked value at "next" question */}
+            <input type="radio" name={`answer`} onClick={() => counter = i}/> {/* fix bug with same checked value at "next" question//// onChange? */} 
             {el}
           </label>
         ))}
         {/* <label><input type=radiobutton name=answer} />{this.props.test.questions[this.props.step].possibleAnswers.}</label> */}
-        <button onClick={() => this.props.nextStep(this.counter)} >Следующий вопрос</button> {/* onClick={this.fixNextCheckedBug}  */}
+        <button onClick={() => this.props.nextStep(counter)} >Следующий вопрос</button> {/* onClick={this.fixNextCheckedBug}  */}
       </section>
     );
   }

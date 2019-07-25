@@ -26,6 +26,7 @@ export default class TestContainer extends Component {
     : this.endTest();
     console.log(this.state.answerCollector);
   };
+  
   endTest = () => {
     localStorage[`${this.props.test.name}`] = this.state.answerCollector;
     this.setState({endTest: true});

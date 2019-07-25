@@ -18,7 +18,19 @@ export default class TestContainer extends Component {
   // }.bind(this);
 
   startTest = () => this.setState({ startTest: true });
-  nextStep = () => this.state.step + 1 < this.props.test.questions.length ? this.setState({step: this.state.step + 1}) : this.setState({endTest: true});
+  nextStep = (answer) => {
+    this.state.answerCollector.push(answer);     //should i use this.setState instead?
+    
+    this.state.step + 1 < this.props.test.questions.length ? this.setState({step: this.state.step + 1}) 
+    //: this.setState({endTest: true});
+    : this.endTest();
+    console.log(this.state.answerCollector);
+  };
+  endTest = () => {
+    localStorage[`${this.props.test.name}`] = this.state.answerCollector;
+    this.setState({endTest: true});
+  }
+
 
   render() {
     return (
@@ -29,7 +41,7 @@ export default class TestContainer extends Component {
         ) : this.state.startTest === false ? (
           <TestStartPage startTest={this.startTest} />
         ) : (
-          <Test test={this.props.test} step={this.state.step} nextStep={this.nextStep} key={this.state.step}/>
+          <Test test={this.props.test} step={this.state.step} nextStep={this.nextStep} key={this.state.step}  />
         )}
       </section>
     );

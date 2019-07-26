@@ -20,7 +20,7 @@
         "possibleAnswers": ["1", "2", "3", "4"]
       }
     ],
-    "rightAnswers": [2, 3]
+    "rightAnswers": [2, 3, 0]
   },
   {
     "name": "html",

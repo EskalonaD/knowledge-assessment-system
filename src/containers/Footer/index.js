@@ -7,8 +7,8 @@ export default class Footer extends Component {
       <footer className={styles.footer}>
         <section className={styles.footer__block}>Копирайт</section>
         <section className={styles.footer__block}>Дата</section>
-        <section className={styles.footer__block}>Линк на About Us</section>
-        <section className={styles.footer__block}>Контакты</section>
+        <section className={styles.footer__block}><a href="./about">Линк на About Us</a></section> {/* router??? */}
+        <section className={styles.footer__block}><a href="./tests">Контакты</a></section>          {/* router??? */}
         <section className={styles.footer__block}>Соцсети</section>
       </footer>
     );

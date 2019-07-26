@@ -4,6 +4,7 @@ import styles from "./index.scss";
 import Heading from "@components/Heading";
 import TestStartPage from "@components/TestStartPage";
 import Test from "@containers/Test"; // check if its component should be in @comnponents/
+import Statistic from "@components/Statistic";
 
 export default class TestContainer extends Component {
   state = {
@@ -38,7 +39,7 @@ export default class TestContainer extends Component {
       <section>
         <Heading hNumber="2" content={this.props.test.name} />
         {this.state.endTest ? (
-        <div>Заглушка для страницы конца теста</div>
+        <Statistic test={this.props.test} />
         ) : this.state.startTest === false ? (
           <TestStartPage startTest={this.startTest} />
         ) : (

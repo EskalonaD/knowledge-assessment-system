@@ -49,3 +49,16 @@ export default class TestContainer extends Component {
     );
   }
 }
+
+
+// const time = (min) => {
+//   const timer = setTimeout(() => TestContainer.endTest, min * 60 * 1000);
+//   return timer;
+// }
+
+// componentWillUnmount () {
+//   clearTimeout(time)      //change to fit `time` function\method
+//   if(!this.state.startTest) return;
+//   if(this.state.endTest) return;
+//   localStorage[`${this.props.test.name}`] = this.state.answerCollector;
+// }

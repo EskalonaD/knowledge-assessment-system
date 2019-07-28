@@ -3,11 +3,14 @@ import styles from "./index.scss";
 import ToolsContainer from "@containers/ToolsContainer";
 import data from "../../dataBase/test.json";
 import TestContainer from "@containers/TestContainer";
+import Card from "@components/Card";
 
 export default class Tests extends Component {
   state = {
     selectedTest: null
   };
+
+  // selectTest() =>
 
   render() {
     // console.log(data);
@@ -15,17 +18,10 @@ export default class Tests extends Component {
       <main>
         <ToolsContainer />
         {this.state.selectedTest === null ? (
-          <div>
+          <div className={styles.test_container}>
             {data.map((el, i) => {
               return (
-                <section
-                  key={el.name}
-                  onClick={() => {
-                    this.setState({ selectedTest: i });
-                  }}
-                >
-                  {el.name}
-                </section>
+                <Card key={el.name} handler={() => this.setState({ selectedTest: i })} content={el.name} />
               );
             })}
           </div>

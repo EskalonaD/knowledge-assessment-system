@@ -1,0 +1,27 @@
+.card {
+    box-sizing: border-box;
+    width: 178px;
+    height: 86px;
+    color: #6a95aa;                 //check
+    border: 1px solid #6a95aa;      //check
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    background-color: #fff;
+    text-align: center;
+    font-size: 20px;
+    line-height: 80px;
+
+    &:hover {
+        border: 1px solid #094f71;      //check
+        color: #094f71;                 //check
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
+
+    }
+    
+    &:active {
+        border: 1px solid #f49131;      //check
+        color: #f49131;                 //check
+        // box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
+    }
+}

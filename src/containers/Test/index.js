@@ -23,15 +23,14 @@ export default class Test extends Component {
         />
         {this.props.test.questions[this.props.step].possibleAnswers.map((el, i) => (
           <label>
-            <input type="radio" name={`answer`} onClick={() => answer = i}/> {/* fix bug with same checked value at "next" question//// onChange? */} 
+            <input type="radio" name={`answer`} onClick={() => answer = i}/> {/* fix bug with same checked value at "next" question//// onChange? */}  {/* Switch inputs to Card component???*/} 
             {el}
           </label>
         ))}
-        {/* <label><input type=radiobutton name=answer} />{this.props.test.questions[this.props.step].possibleAnswers.}</label> */}
         <button onClick={() => {
           this.props.nextStep(answer);
           answer = null;
-        }} >Следующий вопрос</button> {/* onClick={this.fixNextCheckedBug}  */}
+        }} >Следующий вопрос</button>
       </section>
     );
   }

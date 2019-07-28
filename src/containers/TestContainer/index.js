@@ -17,8 +17,20 @@ export default class TestContainer extends Component {
   // startTest = function() {
   //   this.setState({ startTest: true });
   // }.bind(this);
+  
 
-  startTest = () => this.setState({ startTest: true });
+
+  timer = (min) => {
+    const timer = setTimeout(this.endTest, min * 60 * 100);
+    return timer;
+  }
+
+
+  startTest = () => {
+    this.setState({ startTest: true });
+    this.timer(this.props.test.time);
+  }
+
   nextStep = (answer) => {
     this.state.answerCollector.push(answer);     //should i use this.setState instead?
     
@@ -27,7 +39,7 @@ export default class TestContainer extends Component {
     : this.endTest();
     console.log(this.state.answerCollector);
   };
-  
+
   endTest = () => {
     localStorage[`${this.props.test.name}`] = this.state.answerCollector;
     this.setState({endTest: true});
@@ -48,17 +60,15 @@ export default class TestContainer extends Component {
       </section>
     );
   }
+
+  componentWillUnmount () {
+    clearTimeout(this.timer)      //change to fit `time` function\method
+    if(!this.state.startTest) return;
+    if(this.state.endTest) return;
+    localStorage[`${this.props.test.name}`] = this.state.answerCollector;
+  }
 }
 
 
-// const time = (min) => {
-//   const timer = setTimeout(() => TestContainer.endTest, min * 60 * 1000);
-//   return timer;
-// }
 
-// componentWillUnmount () {
-//   clearTimeout(time)      //change to fit `time` function\method
-//   if(!this.state.startTest) return;
-//   if(this.state.endTest) return;
-//   localStorage[`${this.props.test.name}`] = this.state.answerCollector;
-// }
+

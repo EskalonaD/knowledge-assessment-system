@@ -4,9 +4,36 @@
     "questions": [
       {
         "question": "Какой из методов не принадлежит к методам строки?",
-        "possibleAnswers": ["indexOf", "slice", "splice", "concat"],
-        "rightAnswers": []
+        "possibleAnswers": ["indexOf", "slice", "splice", "concat"]
+      },
+      {
+        "question": "Как отцентровать элемент по высоте и ширине?",
+        "possibleAnswers": [
+          "margin: auto auto auto auto;",
+          "text-align: center; vertical-align: center;",
+          "margin: 0 auto; vertical-align: middle;",
+          "У родительского блока: display: flex; justify-content: center; align-items: center;"
+        ]
+      },
+      {
+        "question": "trash question",
+        "possibleAnswers": ["1", "2", "3", "4"]
       }
-    ]
+    ],
+    "rightAnswers": [2, 3, 0]
+  },
+  {
+    "name": "html",
+    "questions":[
+      {
+        "question": "Какой из элементов не является html5 тегом?",
+        "possibleAnswers": ["nav", "flex", "section", "main"]
+      },
+      {
+        "question": "Какой атрибут наиболее желателен в теге <img>?",
+        "possibleAnswers": ["alt", "src", "href", "script"]
+      }
+    ],
+    "rightAnswers": [1, 0]
   }
 ]

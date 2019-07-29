@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 const MENU_LIST = [
   { name: `На главную`, url: `/` },
   { name: `Тесты`, url: `/tests` },
-  { name: `Статистика`, url: `/statictics` },
+  { name: `Статистика`, url: `/statistics` },
   { name: `Контакты`, url: `/contacts` },
   { name: `О нас`, url: `/about` },
   { name: `Войти`, url: `/login` }

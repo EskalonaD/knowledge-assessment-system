@@ -7,6 +7,7 @@ import Slider from "@containers/Slider";
 import MainPage from "@containers/MainPage";
 import Tests from "@containers/Tests";
 import Contacts from "@containers/Contacts";
+import Statistics from "@containers/Statistics";
 import Footer from "@containers/Footer";
 
 export default class App extends Component {
@@ -19,6 +20,7 @@ export default class App extends Component {
           <Route exact path="/" component={MainPage} />
           <Route exact path="/tests" component={Tests} />
           <Route exact path="/contacts" component={Contacts} />
+          <Route exact path="/statistics" component={Statistics} />
         </Switch>
         <Footer />
       </Router>

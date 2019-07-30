@@ -14,9 +14,14 @@
           "margin: 0 auto; vertical-align: middle;",
           "У родительского блока: display: flex; justify-content: center; align-items: center;"
         ]
+      },
+      {
+        "question": "trash question",
+        "possibleAnswers": ["1", "2", "3", "4"]
       }
     ],
-    "rightAnswers": [3, 4]
+    "rightAnswers": [2, 3, 0],
+    "time": 1
   },
   {
     "name": "html",
@@ -30,6 +35,7 @@
         "possibleAnswers": ["alt", "src", "href", "script"]
       }
     ],
-    "rightAnswers":[2, 1]
+    "rightAnswers": [1, 0],
+    "time": 10
   }
 ]

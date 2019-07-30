@@ -5,6 +5,12 @@ import data from "../../dataBase/test.json";
 import TestContainer from "@containers/TestContainer";
 import Card from "@components/Card";
 
+const sortLib = {
+  Времени: `time`,
+  "Количеству вопросов": `questions.length`,
+  Названию: `name`,
+  "Отменить сортировку": null
+};
 export default class Tests extends Component {
   state = {
     selectedTest: null,
@@ -34,6 +40,10 @@ export default class Tests extends Component {
     ] //increase/decrease???
   };
 
+  formateData = data => [...data];
+
+  // sort= () => this.
+
   searchHandler = str => this.setState({ searchFor: str });
 
   // Return state to initial value after click on "Тесты" in menu;
@@ -48,7 +58,6 @@ export default class Tests extends Component {
   }
 
   render() {
-    // console.log(`${this.state.searchFor} - search for`);
     let newdata = this.state.testSorted ? this.state.data : data;
 
     return (
@@ -78,9 +87,4 @@ export default class Tests extends Component {
       </main>
     );
   }
-
-  //   componentDidUpdate(prevProps, prevState){
-  //     this.state.selectedTest === prevState.state.selectedTest
-  //     setState ( {defaults})
-  // }
 }

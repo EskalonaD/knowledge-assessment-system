@@ -61,11 +61,7 @@ export default class TestContainer extends Component {
         ) : this.state.startTest === false ? (
           <TestStartPage startTest={this.startTest} />
         ) : (
-          <Test
-            task={test.questions[step]}
-            nextStep={this.nextStep}
-            // key={step}
-          />
+          <Test task={test.questions[step]} nextStep={this.nextStep} />
         )}
       </section>
     );

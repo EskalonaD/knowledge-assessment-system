@@ -16,11 +16,14 @@ export default class Test extends Component {
     answer: null
   };
 
-  handleChange = () => this.setState({ answer: i });
+  handleChange = i => this.setState({ answer: i });
+  handleClick = answer =>
+    this.setState({ answer: null }, () => {
+      this.props.nextStep(answer);
+    });
 
   render() {
-    // let answer = null;
-    const { task, nextStep } = this.props;
+    const { task } = this.props;
     const { answer } = this.state;
 
     return (
@@ -33,20 +36,13 @@ export default class Test extends Component {
               checked={answer === i}
               name={`answer`}
               value={i}
-              onChange={() => this.setState({ answer: i })}
+              onChange={() => this.handleChange(i)}
             />
-            {/* fix bug with same checked value at "next" question//// onChange? */}{" "}
             {/* Switch inputs to Card component???*/}
             {el}
           </label>
         ))}
-        <button
-          onClick={() =>
-            this.setState({ answer: null }, () => {
-              nextStep(answer);
-            })
-          }
-        >
+        <button onClick={() => this.handleClick(answer)}>
           Следующий вопрос
         </button>
       </section>

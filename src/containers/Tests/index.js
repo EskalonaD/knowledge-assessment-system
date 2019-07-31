@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import styles from "./index.scss";
 import ToolsContainer from "@containers/ToolsContainer";
-import data from "../../dataBase/test.json";
 import TestContainer from "@containers/TestContainer";
 import Card from "@components/Card";
+import { connect } from "react-redux";
+import { CommonAction } from "@ducks/mainReducer";
+import { selectData, selectTestNumber } from "@ducks/mainReducer/reselect";
 
 const sortLib = {
   Времени: `time`,
@@ -11,18 +13,18 @@ const sortLib = {
   Названию: `name`,
   "Отменить сортировку": null
 };
-export default class Tests extends Component {
+export class Tests extends Component {
   state = {
     selectedTest: null,
     searchFor: ``,
     testSorted: false,
-    data: Object.values(data),
+    // data: Object.values(this.props.data),
     sortTypes: [
       [
         `Времени`,
         () =>
           this.setState({
-            data: this.state.data.sort((a, b) => a.time - b.time),
+            data: this.props.data.sort((a, b) => a.time - b.time),
             testSorted: true
           })
       ],
@@ -30,7 +32,7 @@ export default class Tests extends Component {
         `Количеству вопросов`,
         () =>
           this.setState({
-            data: this.state.data.sort(
+            data: this.props.data.sort(
               (a, b) => a.questions.length - b.questions.length
             ),
             testSorted: true
@@ -40,6 +42,10 @@ export default class Tests extends Component {
     ] //increase/decrease???
   };
 
+  // static defaultProps = {
+  //   data: []
+  // };
+
   formateData = data => [...data];
 
   // sort= () => this.
@@ -47,26 +53,30 @@ export default class Tests extends Component {
   searchHandler = str => this.setState({ searchFor: str });
 
   // Return state to initial value after click on "Тесты" in menu;
-  componentDidUpdate(prevProps, prevState) {
-    if (
-      this.state.selectedTest === prevState.selectedTest &&
-      prevState.selectedTest !== null
-    )
-      this.setState({
-        selectedTest: null
-      });
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (
+  //     this.state.selectedTest === prevState.selectedTest &&
+  //     prevState.selectedTest !== null
+  //   )
+  //     this.setState({
+  //       selectedTest: null
+  //     });
+  // }
+
+  // componentDidMount() {
+  //   this.props.CommonAction(true);
+  // }
 
   render() {
-    let newdata = this.state.testSorted ? this.state.data : data;
-
+    // let newdata = this.state.testSorted ? this.props.data : data;
+    let newdata = this.props.data;
     return (
       <main>
         <ToolsContainer
           searchHandler={this.searchHandler}
           sortTypes={this.state.sortTypes}
         />
-        {this.state.selectedTest === null ? (
+        {this.props.selectedTest === null ? (
           <div className={styles.test_container}>
             {newdata.map((el, i) => {
               if (el.name.indexOf(this.state.searchFor) !== -1) {
@@ -74,7 +84,7 @@ export default class Tests extends Component {
                 return (
                   <Card
                     key={el.name}
-                    handler={() => this.setState({ selectedTest: i })}
+                    handler={() => this.props.CommonAction(i)}
                     content={el.name}
                   />
                 );
@@ -82,9 +92,25 @@ export default class Tests extends Component {
             })}
           </div>
         ) : (
-          <TestContainer test={data[this.state.selectedTest]} />
+          <TestContainer test={this.props.data[this.props.selectedTest]} />
         )}
       </main>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  data: selectData(state),
+  selectedTest: selectTestNumber(state)
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    CommonAction: data => dispatch(CommonAction(data))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Tests);

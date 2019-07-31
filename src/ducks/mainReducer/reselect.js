@@ -11,3 +11,10 @@ export const selectTestNumber = createSelector(
   main,
   ({ selectedTest }) => selectedTest
 );
+
+export const selectTestNumber = createSelector(
+  selectData,
+  selectTestNumber,
+  ( data, testNumber ) => data[testNumber]
+);
+

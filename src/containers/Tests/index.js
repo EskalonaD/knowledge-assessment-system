@@ -70,13 +70,14 @@ export class Tests extends Component {
   render() {
     // let newdata = this.state.testSorted ? this.props.data : data;
     let newdata = this.props.data;
+    let { data, selectedTest } = this.props;
     return (
       <main>
         <ToolsContainer
           searchHandler={this.searchHandler}
           sortTypes={this.state.sortTypes}
         />
-        {this.props.selectedTest === null ? (
+        {selectedTest === null ? (
           <div className={styles.test_container}>
             {newdata.map((el, i) => {
               if (el.name.indexOf(this.state.searchFor) !== -1) {
@@ -92,7 +93,7 @@ export class Tests extends Component {
             })}
           </div>
         ) : (
-          <TestContainer test={this.props.data[this.props.selectedTest]} />
+          <TestContainer test={data[selectedTest]} />
         )}
       </main>
     );

@@ -28,3 +28,8 @@ export const selectFilteredTestsBySearch = createSelector(
   selectSearchStr,
   (data, searchStr) => data.filter(el => el.name.includes(searchStr))
 );
+
+export const selectSortType = createSelector(
+  main,
+  ({ sortType }) => sortType
+);

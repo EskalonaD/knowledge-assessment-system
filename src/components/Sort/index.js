@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 
 export default class Sort extends Component {
-  handleChange = e =>
-    this.props.sortTypes.find(el => el[0] === e.target.value)[1]();
+  handleChange = e => this.props.handler(e.target.value);
+
   constructOptionList = () =>
-    this.props.sortTypes.map(([name]) => <option value={name}>{name}</option>);
+    Object.entries(this.props.data).map(([key, name]) => (
+      <option value={key}>{name}</option>
+    ));
 
   render() {
     return (

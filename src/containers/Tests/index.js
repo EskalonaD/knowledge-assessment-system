@@ -4,57 +4,75 @@ import ToolsContainer from "@containers/ToolsContainer";
 import TestContainer from "@containers/TestContainer";
 import Card from "@components/Card";
 import { connect } from "react-redux";
-import { CommonAction, setSearchStr } from "@ducks/mainReducer";
+import { CommonAction, setSearchStr, setSortType } from "@ducks/mainReducer";
 import {
   selectData,
   selectTestNumber,
   selectTest,
   selectSearchStr,
-  selectFilteredTestsBySearch
+  selectFilteredTestsBySearch,
+  selectSortType
 } from "@ducks/mainReducer/reselect";
 
+// TODO decrease//increase
 const sortLib = {
-  Времени: `time`,
-  "Количеству вопросов": `questions.length`,
-  Названию: `name`,
-  "Отменить сортировку": null
+  time: `Времени`,
+  questions: `Количеству вопросов`,
+  name: `Названию`,
+  reset: `Отменить сортировку`
 };
 export class Tests extends Component {
   state = {
-    selectedTest: null,
+    // selectedTest: null,
     searchStr: ``,
-    testSorted: false,
+    // testSorted: false,
+    sortType: `resetSortType`
     // data: Object.values(this.props.data),
-    sortTypes: [
-      [
-        `Времени`,
-        () =>
-          this.setState({
-            data: this.props.data.sort((a, b) => a.time - b.time),
-            testSorted: true
-          })
-      ],
-      [
-        `Количеству вопросов`,
-        () =>
-          this.setState({
-            data: this.props.data.sort(
-              (a, b) => a.questions.length - b.questions.length
-            ),
-            testSorted: true
-          })
-      ],
-      [`Отменить сортировку`, () => this.setState({ testSorted: false })]
-    ] //increase/decrease???
+    //   sortTypes: [
+    //     [
+    //       `Времени`,
+    //       () =>
+    //         this.setState({
+    //           data: this.props.data.sort((a, b) => a.time - b.time),
+    //           testSorted: true
+    //         })
+    //     ],
+    //     [
+    //       `Количеству вопросов`,
+    //       () =>
+    //         this.setState({
+    //           data: this.props.data.sort(
+    //             (a, b) => a.questions.length - b.questions.length
+    //           ),
+    //           testSorted: true
+    //         })
+    //     ],
+    //     [`Отменить сортировку`, () => this.setState({ testSorted: false })]
+    //   ] //increase/decrease???
+    // };
   };
-
   // static defaultProps = {
   //   data: []
   // };
 
-  formateData = data => [...data];
+  // cloneData = data => [...data]; //does it needed???
 
-  // sort= () => this.
+  sortData = () => {
+    const { sortType } = this.state;
+    console.log(sortType);
+
+    return [...this.props.searchedData].sort((a, b) => {
+      // if (!sortType) return 0;
+      if (sortType === `resetSortType`) return 0;
+
+      const firstItem = a[sortType];
+      const secondItem = b[sortType];
+
+      return sortType === `questions`
+        ? firstItem.length - secondItem.length
+        : firstItem - secondItem;
+    });
+  };
 
   searchHandler = str => this.props.setSearchStr(str);
 
@@ -91,22 +109,13 @@ export class Tests extends Component {
       <main>
         <ToolsContainer
           searchHandler={this.searchHandler}
-          sortTypes={this.state.sortTypes}
+          sortData={sortLib}
+          // sortHandler={val => this.setState({ sortType: val })}
+          sortHandler={val => this.props.setSortType(val)}
         />
         {selectedTestNumber === null ? (
           <div className={styles.test_container}>
-            {/* {data.map((el, i) => {
-              if (el.name.includes(searchStr)) {
-                return (
-                  <Card
-                    key={el.name}
-                    handler={() => this.props.CommonAction(i)}
-                    content={el.name}
-                  />
-                );
-              }
-            })} */}
-            {searchedData.map((el, i) => (
+            {this.sortData().map((el, i) => (
               <Card
                 key={el.name}
                 handler={() => this.props.CommonAction(i)}
@@ -127,13 +136,15 @@ const mapStoreToProps = store => ({
   selectedTestNumber: selectTestNumber(store),
   selectedTest: selectTest(store),
   searchStr: selectSearchStr(store),
-  searchedData: selectFilteredTestsBySearch(store)
+  searchedData: selectFilteredTestsBySearch(store),
+  sortType: selectSortType(store)
 });
 
 const mapDispatchToProps = dispatch => {
   return {
     CommonAction: data => dispatch(CommonAction(data)),
-    setSearchStr: data => dispatch(setSearchStr(data))
+    setSearchStr: data => dispatch(setSearchStr(data)),
+    setSortType: data => dispatch(setSortType(data))
   };
 };
 

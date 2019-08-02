@@ -10,9 +10,11 @@ import {
   selectTestNumber,
   selectTest,
   selectSearchStr,
-  selectFilteredTestsBySearch,
+  selectSortedDataForTests,
   selectSortType
 } from "@ducks/mainReducer/reselect";
+
+// TODO  remove useless imports /// change sorted data to data /// move serachHandler to reselect
 
 // TODO decrease//increase
 const sortLib = {
@@ -22,57 +24,22 @@ const sortLib = {
   reset: `Отменить сортировку`
 };
 export class Tests extends Component {
-  state = {
-    // selectedTest: null,
-    searchStr: ``,
-    // testSorted: false,
-    sortType: `resetSortType`
-    // data: Object.values(this.props.data),
-    //   sortTypes: [
-    //     [
-    //       `Времени`,
-    //       () =>
-    //         this.setState({
-    //           data: this.props.data.sort((a, b) => a.time - b.time),
-    //           testSorted: true
-    //         })
-    //     ],
-    //     [
-    //       `Количеству вопросов`,
-    //       () =>
-    //         this.setState({
-    //           data: this.props.data.sort(
-    //             (a, b) => a.questions.length - b.questions.length
-    //           ),
-    //           testSorted: true
-    //         })
-    //     ],
-    //     [`Отменить сортировку`, () => this.setState({ testSorted: false })]
-    //   ] //increase/decrease???
-    // };
-  };
-  // static defaultProps = {
-  //   data: []
+  // sortData = () => {
+  //   // const { sortType } = this.state;
+  //   // console.log(sortType);
+  //   const { sortType } = this.props;
+  //   return [...this.props.searchedData].sort((a, b) => {
+  //     // if (!sortType) return 0;
+  //     if (sortType === `resetSortType`) return 0;
+
+  //     const firstItem = a[sortType];
+  //     const secondItem = b[sortType];
+
+  //     return sortType === `questions`
+  //       ? firstItem.length - secondItem.length
+  //       : firstItem - secondItem;
+  //   });
   // };
-
-  // cloneData = data => [...data]; //does it needed???
-
-  sortData = () => {
-    const { sortType } = this.state;
-    console.log(sortType);
-
-    return [...this.props.searchedData].sort((a, b) => {
-      // if (!sortType) return 0;
-      if (sortType === `resetSortType`) return 0;
-
-      const firstItem = a[sortType];
-      const secondItem = b[sortType];
-
-      return sortType === `questions`
-        ? firstItem.length - secondItem.length
-        : firstItem - secondItem;
-    });
-  };
 
   searchHandler = str => this.props.setSearchStr(str);
 
@@ -103,7 +70,8 @@ export class Tests extends Component {
       selectedTestNumber,
       selectedTest,
       searchStr,
-      searchedData
+      searchedData,
+      sortedData
     } = this.props;
     return (
       <main>
@@ -115,7 +83,7 @@ export class Tests extends Component {
         />
         {selectedTestNumber === null ? (
           <div className={styles.test_container}>
-            {this.sortData().map((el, i) => (
+            {sortedData.map((el, i) => (
               <Card
                 key={el.name}
                 handler={() => this.props.CommonAction(i)}
@@ -132,11 +100,11 @@ export class Tests extends Component {
 }
 
 const mapStoreToProps = store => ({
-  data: selectData(store),
+  // data: selectData(store),
   selectedTestNumber: selectTestNumber(store),
   selectedTest: selectTest(store),
   searchStr: selectSearchStr(store),
-  searchedData: selectFilteredTestsBySearch(store),
+  sortedData: selectSortedDataForTests(store),
   sortType: selectSortType(store)
 });
 

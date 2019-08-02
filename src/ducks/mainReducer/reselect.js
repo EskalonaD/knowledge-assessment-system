@@ -33,3 +33,20 @@ export const selectSortType = createSelector(
   main,
   ({ sortType }) => sortType
 );
+
+export const selectSortedDataForTests = createSelector(
+  selectSortType,
+  selectFilteredTestsBySearch,
+  (sortType, searchedData) => {
+    return [...searchedData].sort((a, b) => {
+      if (sortType === `resetSortType`) return 0;
+
+      const firstItem = a[sortType];
+      const secondItem = b[sortType];
+
+      return sortType === `questions`
+        ? firstItem.length - secondItem.length
+        : firstItem - secondItem;
+    });
+  }
+);

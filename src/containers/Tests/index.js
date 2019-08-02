@@ -4,8 +4,14 @@ import ToolsContainer from "@containers/ToolsContainer";
 import TestContainer from "@containers/TestContainer";
 import Card from "@components/Card";
 import { connect } from "react-redux";
-import { CommonAction } from "@ducks/mainReducer";
-import { selectData, selectTestNumber } from "@ducks/mainReducer/reselect";
+import { CommonAction, setSearchStr } from "@ducks/mainReducer";
+import {
+  selectData,
+  selectTestNumber,
+  selectTest,
+  selectSearchStr,
+  selectFilteredTestsBySearch
+} from "@ducks/mainReducer/reselect";
 
 const sortLib = {
   Времени: `time`,
@@ -16,7 +22,7 @@ const sortLib = {
 export class Tests extends Component {
   state = {
     selectedTest: null,
-    searchFor: ``,
+    searchStr: ``,
     testSorted: false,
     // data: Object.values(this.props.data),
     sortTypes: [
@@ -50,7 +56,7 @@ export class Tests extends Component {
 
   // sort= () => this.
 
-  searchHandler = str => this.setState({ searchFor: str });
+  searchHandler = str => this.props.setSearchStr(str);
 
   // Return state to initial value after click on "Тесты" in menu;
   // componentDidUpdate(prevProps, prevState) {
@@ -67,21 +73,30 @@ export class Tests extends Component {
   //   this.props.CommonAction(true);
   // }
 
+  // TODO remove!!!!!
+  componentDidMount() {
+    this.props.CommonAction(null);
+  }
+
   render() {
     // let newdata = this.state.testSorted ? this.props.data : data;
-    let newdata = this.props.data;
-    let { data, selectedTest } = this.props;
+    let {
+      data,
+      selectedTestNumber,
+      selectedTest,
+      searchStr,
+      searchedData
+    } = this.props;
     return (
       <main>
         <ToolsContainer
           searchHandler={this.searchHandler}
           sortTypes={this.state.sortTypes}
         />
-        {selectedTest === null ? (
+        {selectedTestNumber === null ? (
           <div className={styles.test_container}>
-            {newdata.map((el, i) => {
-              if (el.name.indexOf(this.state.searchFor) !== -1) {
-                //String.prototype.include   ????
+            {/* {data.map((el, i) => {
+              if (el.name.includes(searchStr)) {
                 return (
                   <Card
                     key={el.name}
@@ -90,28 +105,39 @@ export class Tests extends Component {
                   />
                 );
               }
-            })}
+            })} */}
+            {searchedData.map((el, i) => (
+              <Card
+                key={el.name}
+                handler={() => this.props.CommonAction(i)}
+                content={el.name}
+              />
+            ))}
           </div>
         ) : (
-          <TestContainer test={data[selectedTest]} />
+          <TestContainer test={selectedTest} />
         )}
       </main>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  data: selectData(state),
-  selectedTest: selectTestNumber(state)
+const mapStoreToProps = store => ({
+  data: selectData(store),
+  selectedTestNumber: selectTestNumber(store),
+  selectedTest: selectTest(store),
+  searchStr: selectSearchStr(store),
+  searchedData: selectFilteredTestsBySearch(store)
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    CommonAction: data => dispatch(CommonAction(data))
+    CommonAction: data => dispatch(CommonAction(data)),
+    setSearchStr: data => dispatch(setSearchStr(data))
   };
 };
 
 export default connect(
-  mapStateToProps,
+  mapStoreToProps,
   mapDispatchToProps
 )(Tests);

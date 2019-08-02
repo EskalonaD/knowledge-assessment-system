@@ -12,9 +12,19 @@ export const selectTestNumber = createSelector(
   ({ selectedTest }) => selectedTest
 );
 
-export const selectTestNumber = createSelector(
+export const selectTest = createSelector(
   selectData,
   selectTestNumber,
-  ( data, testNumber ) => data[testNumber]
+  (data, testNumber) => data[testNumber]
 );
 
+export const selectSearchStr = createSelector(
+  main,
+  ({ searchStr }) => searchStr
+);
+
+export const selectFilteredTestsBySearch = createSelector(
+  selectData,
+  selectSearchStr,
+  (data, searchStr) => data.filter(el => el.name.includes(searchStr))
+);

@@ -14,15 +14,16 @@ const MENU_LIST = [
 ];
 export default class Menu extends Component {
   render() {
+    const { menuContainer, menuButton, menuButtonActive } = styles;
     return (
       <nav>
-        <ul className={styles.menuContainer}>
+        <ul className={menuContainer}>
           {MENU_LIST.map(el => (
             <NavLink
               key={el.name}
               to={el.url}
-              className={styles.menuButton}
-              activeClassName={el.url === "/" ? `` : styles.menuButtonActive}
+              className={menuButton}
+              activeClassName={el.url === "/" ? `` : menuButtonActive}
             >
               {el.name}
             </NavLink>

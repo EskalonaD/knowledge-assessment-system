@@ -1,23 +1,38 @@
 import data from "@dataBase/test.json";
 
+// list of constances
 const SET_SELECTED_TEST = "SET_SELECTED_TEST";
-const SET_SEARCH = "SET_SEARCH";
-const SET_SORT_TYPE = "SET_SORT_TYPE";
+const SET_SELECTED_STATISTIC = "SET_SELECTED_STATISTIC";
+const SET_SEARCHED_STR = "SET_SEARCHED_STR";
+const SET_SEARCHED_STR_FOR_STATISTIC = "SET_SEARCHED_STR_FOR_STATISTIC";
+const SET_SORTED_TYPE = "SET_SORTED_TYPE";
+const SET_SORTED_TYPE_FOR_STATISTIC = "SET_SORTED_TYPE_FOR_STATISTIC";
 
-export function CommonAction(data) {
+
+
+// list of Actions
+export function setSelectedTest(data) {
   return { type: SET_SELECTED_TEST, payload: data };
-}
+};
+export const setSelectedStatistic = data => ({type: SET_SELECTED_STATISTIC, payload: data});
+export const setSearchedStr = data => ({ type: SET_SEARCHED_STR, payload: data });
+export const setSearchedStrForStatistic = data => ({ type: SET_SEARCHED_STR_FOR_STATISTIC, payload: data });
+export const setSortedType = data => ({ type: SET_SORTED_TYPE, payload: data });
+export const setSortedTypeForStatistic = data => ({ type: SET_SORTED_TYPE_FOR_STATISTIC, payload: data });
 
-export const setSearchStr = data => ({ type: SET_SEARCH, payload: data });
-export const setSortType = data => ({ type: SET_SORT_TYPE, payload: data });
-
-export const initialState = {
-  searchStr: ``,
+// initialState
+export const initialState = { //initialState should be placed before constances???
   data: data,
   selectedTest: null,
-  sortType: `resetSortType`
+  selectedStatistic: null,
+  searchedStr: ``,
+  searchedStrForStatistic: ``,
+  sortedType: `resetSortedType`,
+  sortedTypeForStatistic: `resetSortedType`
+  // matchedDataForStatistic: ``
 };
 
+// reducer
 export default function commonReducer(state = initialState, action) {
   switch (action.type) {
     case SET_SELECTED_TEST:
@@ -25,16 +40,32 @@ export default function commonReducer(state = initialState, action) {
         ...state,
         selectedTest: action.payload
       };
-    case SET_SEARCH:
+      case SET_SELECTED_STATISTIC:
+        return {
+          ...state,
+          selectedStatistic: action.payload
+        };
+    case SET_SEARCHED_STR:
       return {
         ...state,
-        searchStr: action.payload
+        searchedStr: action.payload
       };
-    case SET_SORT_TYPE:
+    case SET_SEARCHED_STR_FOR_STATISTIC:
       return {
         ...state,
-        sortType: action.payload
+        searchedStrForStatistic: action.payload
       };
+    case SET_SORTED_TYPE:
+      return {
+        ...state,
+        sortedType: action.payload
+      };
+    case SET_SORTED_TYPE_FOR_STATISTIC:
+      return {
+        ...state,
+        sortedTypeForStatistic: action.payload
+      };
+
     default:
       return state;
   }

@@ -1,18 +1,19 @@
 import React, { Component } from "react";
 import styles from "./index.scss";
-import ToolsContainer from "@containers/ToolsContainer";
-import TestContainer from "@containers/TestContainer";
-import Card from "@components/Card";
 import { connect } from "react-redux";
-import { CommonAction, setSearchStr, setSortType } from "@ducks/mainReducer";
+import { setSelectedTest, setSearchedStr, setSortedType } from "@ducks/mainReducer"; 
 import {
   selectData,
   selectTestNumber,
   selectTest,
-  selectSearchStr,
+  selectSearchedStr,
   selectSortedDataForTests,
-  selectSortType
-} from "@ducks/mainReducer/reselect";
+  selectSortedType
+} from "@ducks/mainReducer/reselect"; 
+
+import ToolsContainer from "@containers/ToolsContainer";
+import TestContainer from "@containers/TestContainer";
+import Card from "@components/Card";
 
 // TODO  remove useless imports /// change sorted data to data /// move serachHandler to reselect
 
@@ -24,24 +25,8 @@ const sortLib = {
   reset: `Отменить сортировку`
 };
 export class Tests extends Component {
-  // sortData = () => {
-  //   // const { sortType } = this.state;
-  //   // console.log(sortType);
-  //   const { sortType } = this.props;
-  //   return [...this.props.searchedData].sort((a, b) => {
-  //     // if (!sortType) return 0;
-  //     if (sortType === `resetSortType`) return 0;
 
-  //     const firstItem = a[sortType];
-  //     const secondItem = b[sortType];
-
-  //     return sortType === `questions`
-  //       ? firstItem.length - secondItem.length
-  //       : firstItem - secondItem;
-  //   });
-  // };
-
-  searchHandler = str => this.props.setSearchStr(str);
+  searchHandler = str => this.props.setSearchedStr(str);
 
   // Return state to initial value after click on "Тесты" in menu;
   // componentDidUpdate(prevProps, prevState) {
@@ -54,23 +39,18 @@ export class Tests extends Component {
   //     });
   // }
 
-  // componentDidMount() {
-  //   this.props.CommonAction(true);
-  // }
 
   // TODO remove!!!!!
   componentDidMount() {
-    this.props.CommonAction(null);
+    this.props.setSelectedTest(null);
+    this.props.setSearchedStr(``);
+    this.props.setSortedType(`resetSortedType`);
   }
 
   render() {
-    // let newdata = this.state.testSorted ? this.props.data : data;
     let {
-      data,
       selectedTestNumber,
       selectedTest,
-      searchStr,
-      searchedData,
       sortedData
     } = this.props;
     return (
@@ -78,15 +58,14 @@ export class Tests extends Component {
         <ToolsContainer
           searchHandler={this.searchHandler}
           sortData={sortLib}
-          // sortHandler={val => this.setState({ sortType: val })}
-          sortHandler={val => this.props.setSortType(val)}
+          sortHandler={val => this.props.setSortedType(val)}
         />
         {selectedTestNumber === null ? (
           <div className={styles.test_container}>
             {sortedData.map((el, i) => (
               <Card
                 key={el.name}
-                handler={() => this.props.CommonAction(i)}
+                handler={() => this.props.setSelectedTest(i)}
                 content={el.name}
               />
             ))}
@@ -103,16 +82,16 @@ const mapStoreToProps = store => ({
   // data: selectData(store),
   selectedTestNumber: selectTestNumber(store),
   selectedTest: selectTest(store),
-  searchStr: selectSearchStr(store),
+  searchedStr: selectSearchedStr(store),
   sortedData: selectSortedDataForTests(store),
-  sortType: selectSortType(store)
+  sortedType: selectSortedType(store)
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    CommonAction: data => dispatch(CommonAction(data)),
-    setSearchStr: data => dispatch(setSearchStr(data)),
-    setSortType: data => dispatch(setSortType(data))
+    setSelectedTest: data => dispatch(setSelectedTest(data)),
+    setSearchedStr: data => dispatch(setSearchedStr(data)),
+    setSortedType: data => dispatch(setSortedType(data))
   };
 };
 

@@ -1,73 +1,88 @@
 import React, { Component } from "react";
 import styles from "./index.scss";
+import {connect} from "react-redux";
+
 
 import ToolsContainer from "@containers/ToolsContainer";
 import Card from "@components/Card";
 import Statistic from "@components/Statistic";
 import data from "../../dataBase/test.json";
+import {setSelectedStatistic, setSearchedStrForStatistic, setSortedTypeForStatistic} from "@ducks/mainReducer";
+import {
+  selectSelectedStatistic, 
+  selectSearchedStrForStatistic, 
+  selectSearchedDataForStatistic, 
+  selectMatchedDataForStatistic,
+  selectSortedTypeForStatistic,
+  selectSortedDataForStatistic} from "@ducks/mainReducer/reselect.js"
 
-export default class Statistics extends Component {
-  state = {
-    selectedTest: null,
-    searchFor: ``,
-    testSorted: false,
-    data: Object.entries(localStorage),
-    sortTypes: [
-      [
-        `Времени`,
-        () =>
-          this.setState({
-            data: this.state.data.sort((a, b) => a.time - b.time),
-            testSorted: true
-          })
-      ],
-      [
-        `Количеству вопросов`,
-        () =>
-          this.setState({
-            data: this.state.data.sort(
-              (a, b) => a.questions.length - b.questions.length
-            ),
-            testSorted: true
-          })
-      ],
-      [`Отменить сортировку`, () => this.setState({ testSorted: false })]
-    ] //increase/decrease???
-  };
+const sortLib = {
+  time: `Времени`,
+  questions: `Количеству вопросов`,
+  name: `Названию`,             //fix it... put additional data in store???
+  statistic: `Статистике`,
+  reset: `Отменить сортировку`
+};
 
-  searchHandler = str => this.setState({ searchFor: str });
-  // selectTest = (str) => this.setState({selectedTest: str});
+export class Statistics extends Component {
+
+  searchHandler = str => this.props.setSearchedStrForStatistic(str);
+
+  componentDidMount() {
+    this.props.setSelectedStatistic(null);
+    this.props.setSearchedStrForStatistic(``);   
+    this.props.setSortedTypeForStatistic(`resetSortedType`);   //destroy ForStatistic w/o router???
+  }
 
   render() {
-    // console.log(thisw.render);
-    // debugger;
-    let newdata = this.state.testSorted ? this.state.data : localStorage;
+    const {
+      selectedStatistic, 
+      setSelectedStatistic, 
+      searchedStrForStatistic, 
+      searchedDataForStatistic, 
+      matchedDataForStatistic,
+      sortedDataForStatistic} = this.props;
+
     return (
       <main>
         <ToolsContainer
           searchHandler={this.searchHandler}
-          sortTypes={this.state.sortTypes}
+          sortHandler={val => this.props.setSortedTypeForStatistic(val)}
+          sortData={sortLib}
         />
-        {this.state.selectedTest !== null ? (
-          <Statistic
-            test={data.find(el => el.name === this.state.selectedTest)}
-          />
-        ) : (
+        {selectedStatistic === null ? 
           <div className={styles.cards_container}>
-            {" "}
-            {Object.keys(localStorage)
-              .filter(el => el.indexOf(this.state.searchFor) !== -1)
-              .filter(el => data.some(item => el === item.name))
-              .map(el => (
-                <Card
-                  content={el}
-                  handler={() => this.setState({ selectedTest: el })}
-                />
-              ))}{" "}
+            {
+              sortedDataForStatistic.map(el => (
+                <Card 
+                  content={el.name}
+                  handler={() => setSelectedStatistic(el.name)}
+                    />
+              ))
+            }
           </div>
-        )}{" "}
-        {/* remove logLevel:webpack, test in prodversion or ognore in redux////string.prototype.include??? */}
+          :<Statistic
+            test={data.find(el => el.name === selectedStatistic)}
+          />
+          }
       </main>
     );
   }
 }
+
+const mapStoreToProps = store => ({
+  selectedStatistic: selectSelectedStatistic(store),
+  searchedStrForStatistic: selectSearchedStrForStatistic(store),
+  searchedDataForStatistic: selectSearchedDataForStatistic(store),
+  matchedDataForStatistic: selectMatchedDataForStatistic(store),
+  sortedTypeForStatistic: selectSortedTypeForStatistic(store),
+  sortedDataForStatistic: selectSortedDataForStatistic(store)
+});
+
+const mapDispatchToProps = dispatch => ({
+ setSelectedStatistic: data => dispatch(setSelectedStatistic(data)),
+ setSearchedStrForStatistic: data => dispatch(setSearchedStrForStatistic(data)),
+ setSortedTypeForStatistic: data => dispatch(setSortedTypeForStatistic(data))
+})
+
+export default connect(mapStoreToProps, mapDispatchToProps)(Statistics);

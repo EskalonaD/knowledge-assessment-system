@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import styles from "./index.scss";
 import { connect } from "react-redux";
-import { setSelectedTest, setSearchedStr, setSortedType } from "@ducks/mainReducer"; 
+import {
+  setSelectedTest,
+  setSearchedStr,
+  setSortedType
+} from "@ducks/mainReducer";
 import {
   selectData,
   selectTestNumber,
@@ -9,11 +13,12 @@ import {
   selectSearchedStr,
   selectSortedDataForTests,
   selectSortedType
-} from "@ducks/mainReducer/reselect"; 
+} from "@ducks/mainReducer/reselect";
 
 import ToolsContainer from "@containers/ToolsContainer";
 import TestContainer from "@containers/TestContainer";
 import Card from "@components/Card";
+import Pagination from "@components/Pagination";
 
 // TODO  remove useless imports /// change sorted data to data /// move serachHandler to reselect
 
@@ -25,6 +30,9 @@ const sortLib = {
   reset: `Отменить сортировку`
 };
 export class Tests extends Component {
+  state = {
+    paginationNumber: 1
+  };
 
   searchHandler = str => this.props.setSearchedStr(str);
 
@@ -39,7 +47,6 @@ export class Tests extends Component {
   //     });
   // }
 
-
   // TODO remove!!!!!
   componentDidMount() {
     this.props.setSelectedTest(null);
@@ -48,11 +55,9 @@ export class Tests extends Component {
   }
 
   render() {
-    let {
-      selectedTestNumber,
-      selectedTest,
-      sortedData
-    } = this.props;
+    const { selectedTestNumber, selectedTest, sortedData } = this.props;
+    const { paginationNumber } = this.state;
+    // console.log(sortedData);
     return (
       <main>
         <ToolsContainer
@@ -62,17 +67,48 @@ export class Tests extends Component {
         />
         {selectedTestNumber === null ? (
           <div className={styles.test_container}>
-            {sortedData.map((el, i) => (
-              <Card
-                key={el.name}
-                handler={() => this.props.setSelectedTest(i)}
-                content={el.name}
-              />
-            ))}
+            {sortedData
+              .slice((paginationNumber - 1) * 10, paginationNumber * 10)
+              // .filter(
+              //   (el, i) =>
+              //     i < paginationNumber * 10 && i + 11 > paginationNumber * 10
+              // )
+              .map((el, i) => (
+                <Card
+                  key={el.name}
+                  handler={() => this.props.setSelectedTest(i)}
+                  content={el.name}
+                />
+              ))}
           </div>
         ) : (
           <TestContainer test={selectedTest} />
         )}
+        <section>
+          {/* {sortedData.map((el, i) => {
+            if (i % 10 === 0)
+              return (
+                <Pagination
+                  number={i / 10 + 1}
+                  handler={() => {
+                    console.log(this.state);
+                    this.setState({ paginationNumber: i / 10 + 1 });
+                  }}
+                />
+              );
+          })} */}
+          {Array.from({ length: Math.floor(sortedData.length / 10) }).map(
+            (el, i) => (
+              <Pagination
+                number={i + 1}
+                handler={() => {
+                  console.log(this.state);
+                  this.setState({ paginationNumber: i + 1 });
+                }}
+              />
+            )
+          )}
+        </section>
       </main>
     );
   }

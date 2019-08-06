@@ -45,6 +45,14 @@ state ={
     this.props.setSortedTypeForStatistic(`resetSortedType`); //destroy ForStatistic w/o router???
   }
 
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.selectedStatistic === prevProps.selectedStatistic 
+      && prevProps.selectedStatistic !== null
+    )
+      this.props.setSelectedStatistic(null)
+  }
+  
   render() {
     const {
       selectedStatistic,

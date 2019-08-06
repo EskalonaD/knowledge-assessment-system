@@ -48,6 +48,16 @@ export class Tests extends Component {
   //     });
   // }
 
+
+  // Return state to initial value after click on "Тесты" in menu;
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.selectedTestNumber === prevProps.selectedTestNumber 
+      && prevProps.selectedTestNumber !== null
+    )
+      this.props.setSelectedTest(null)
+  }
+
   // TODO remove!!!!!
   componentDidMount() {
     this.props.setSelectedTest(null);

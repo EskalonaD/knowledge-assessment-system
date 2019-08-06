@@ -127,6 +127,11 @@ export const selectCompletedTests = createSelector(
   main,
   ({completedTests}) => completedTests
 )
+
+export const selectSliderTranslateValue = createSelector(
+  main,
+  ({sliderTranslateValue}) => sliderTranslateValue
+)
 // export const selectTimerStart = createSelector(
 //     () => {
 //       const timer = setTimeout(this.endTest, min * 60 * 100);

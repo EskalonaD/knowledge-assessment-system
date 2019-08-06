@@ -78,25 +78,6 @@ export class Tests extends Component {
           sortData={sortLib}
           sortHandler={val => this.props.setSortedType(val)}
         />
-        {selectedTestNumber === null ? (
-          <div className={styles.test_container}>
-            {sortedData
-              .slice((paginationNumber - 1) * maxItemOnPage, paginationNumber * maxItemOnPage)
-              // .filter(
-              //   (el, i) =>
-              //     i < paginationNumber * 10 && i + 11 > paginationNumber * 10
-              // )
-              .map((el, i) => (
-                <Card
-                  key={el.name}
-                  handler={() => this.props.setSelectedTest(i)}
-                  content={el.name}
-                />
-              ))}
-          </div>
-        ) : (
-          <TestContainer test={selectedTest} />
-        )}
         {selectedTestNumber === null && 
         <section>
           {Array.from({ length: Math.ceil(sortedData.length / maxItemOnPage) || 1 }).map(
@@ -111,6 +92,27 @@ export class Tests extends Component {
             )
           )}
         </section>}
+        {selectedTestNumber === null ? (
+          <div className={styles.test_container}>
+            {sortedData
+              .slice((paginationNumber - 1) * maxItemOnPage, paginationNumber * maxItemOnPage)
+              // .filter(
+              //   (el, i) =>
+              //     i < paginationNumber * 10 && i + 11 > paginationNumber * 10
+              // )
+              .map((el, i) => (
+                <Card
+                  key={el.name}
+                  handler={() => this.props.setSelectedTest(i)}
+                  content={el.name}
+                  // className={styles.testCards}
+                />
+              ))}
+          </div>
+        ) : (
+          <TestContainer test={selectedTest} />
+        )}
+        
       </main>
     );
   }

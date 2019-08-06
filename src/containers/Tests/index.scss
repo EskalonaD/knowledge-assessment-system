@@ -2,9 +2,16 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    margin-bottom: 55px;
 }
 
 
 .name {
     padding:20px;
+}
+
+
+main {
+    height: 64vh;
+    overflow-y: auto;
 }

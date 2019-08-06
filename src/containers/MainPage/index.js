@@ -5,7 +5,13 @@ export default class MainPage extends Component {
   render() {
     return (
       <main>
-        MainPage;
+        Приветствуем вас на нашем сайте.
+
+Здесь вы проверите ваши знания в режиме реального времени. 
+ 
+Если готовы и уверены – ПРИСТУПАЙТЕ.
+
+УДАЧИ
       </main>
     );
   }

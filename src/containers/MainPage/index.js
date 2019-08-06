@@ -5,7 +5,6 @@ export default class MainPage extends Component {
   render() {
     return (
       <main>
-        <ToolsContainer />
         MainPage;
       </main>
     );

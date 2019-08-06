@@ -1,12 +1,13 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import styles from "./index.scss";
 
 export default class Card extends Component {
-    render() {
-        return (
-            <div className={styles.card} onClick={this.props.handler}>
-                {this.props.content}
-            </div>
-        )
-    }
+  render() {
+    const { handler, content } = this.props;
+    return (
+      <div className={styles.card} onClick={handler}>
+        {content}
+      </div>
+    );
+  }
 }

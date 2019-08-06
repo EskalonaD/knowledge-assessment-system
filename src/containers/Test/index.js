@@ -11,26 +11,40 @@ export default class Test extends Component {
   //   console.log(this.state);
   // }
   // answer = ``;
+  state = {
+    // value: null,
+    answer: null
+  };
+
+  handleChange = i => this.setState({ answer: i });
+  handleClick = answer =>
+    this.setState({ answer: null }, () => {
+      this.props.nextStep(answer);
+    });
 
   render() {
-    let answer = null;
-    console.log(`answer ${answer}`)
+    const { task } = this.props;
+    const { answer } = this.state;
+
     return (
       <section>
-        <Heading
-          hNumber="3"
-          content={this.props.test.questions[this.props.step].question}
-        />
-        {this.props.test.questions[this.props.step].possibleAnswers.map((el, i) => (
+        <Heading hNumber="3" content={task.question} />
+        {task.possibleAnswers.map((el, i) => (
           <label>
-            <input type="radio" name={`answer`} onClick={() => answer = i}/> {/* fix bug with same checked value at "next" question//// onChange? */}  {/* Switch inputs to Card component???*/} 
+            <input
+              type="radio"
+              checked={answer === i}
+              name={`answer`}
+              value={i}
+              onChange={() => this.handleChange(i)}
+            />
+            {/* Switch inputs to Card component???*/}
             {el}
           </label>
         ))}
-        <button onClick={() => {
-          this.props.nextStep(answer);
-          answer = null;
-        }} >Следующий вопрос</button>
+        <button onClick={() => this.handleClick(answer)}>
+          Следующий вопрос
+        </button>
       </section>
     );
   }

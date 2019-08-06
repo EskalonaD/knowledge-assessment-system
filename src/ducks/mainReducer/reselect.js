@@ -50,10 +50,10 @@ export const selectSortedTypeForStatistic = createSelector(
   ({sortedTypeForStatistic}) => sortedTypeForStatistic
 )
 
-export const selectMatchedDataForStatistic = createSelector(
-  selectSearchedDataForStatistic,
-  (data) => data.filter(el => Object.keys(localStorage).some(item => item === el.name))
-)
+// export const selectMatchedDataForStatistic = createSelector(
+//   selectSearchedDataForStatistic,
+//   (data) => data.filter(el => Object.keys(localStorage).some(item => item === el.name))
+// )
 
 export const selectSortedDataForTests = createSelector(
   selectSortedType,
@@ -76,7 +76,7 @@ export const selectSortedDataForTests = createSelector(
 
 export const selectSortedDataForStatistic = createSelector(
   selectSortedTypeForStatistic,
-  selectMatchedDataForStatistic,
+  selectSearchedDataForStatistic,
   (sortedType, searchedData) => {
     return [...searchedData].sort((a, b) => {
       if (sortedType === `resetSortedType`) return 0;
@@ -123,6 +123,10 @@ export const selectAnswerCollector = createSelector(
   ({answerCollector}) => answerCollector
 )
 
+export const selectCompletedTests = createSelector(
+  main,
+  ({completedTests}) => completedTests
+)
 // export const selectTimerStart = createSelector(
 //     () => {
 //       const timer = setTimeout(this.endTest, min * 60 * 100);

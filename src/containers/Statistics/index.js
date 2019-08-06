@@ -10,7 +10,7 @@ import {
   selectSelectedStatistic,
   selectSearchedStrForStatistic,
   selectSearchedDataForStatistic,
-  selectMatchedDataForStatistic,
+  // selectMatchedDataForStatistic,
   selectSortedTypeForStatistic,
   selectSortedDataForStatistic
 } from "@ducks/mainReducer/reselect.js";
@@ -52,7 +52,7 @@ state ={
     )
       this.props.setSelectedStatistic(null)
   }
-  
+
   render() {
     const {
       selectedStatistic,
@@ -75,6 +75,7 @@ state ={
         {selectedStatistic === null ? (
           <div className={styles.cards_container}>
             {sortedDataForStatistic
+            .filter(el => Object.keys(localStorage).some(item => item === el.name))
                           .slice((paginationNumber - 1) * maxItemOnPage, paginationNumber * maxItemOnPage)
             .map(el => (
               <Card
@@ -109,7 +110,7 @@ const mapStoreToProps = store => ({
   selectedStatistic: selectSelectedStatistic(store),
   searchedStrForStatistic: selectSearchedStrForStatistic(store),
   searchedDataForStatistic: selectSearchedDataForStatistic(store),
-  matchedDataForStatistic: selectMatchedDataForStatistic(store),
+  // matchedDataForStatistic: selectMatchedDataForStatistic(store),
   sortedTypeForStatistic: selectSortedTypeForStatistic(store),
   sortedDataForStatistic: selectSortedDataForStatistic(store)
 });

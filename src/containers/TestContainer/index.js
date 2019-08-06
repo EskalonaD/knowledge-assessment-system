@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import styles from "./index.scss";
 import {connect} from "react-redux";
-import {setIsTestStarted, setIsTestEnded, setTimerId, setQuestionNumber, setAnswerCollector, resetAnswerCollector} from "@ducks/mainReducer";
-import {selectIsTestStarted, selectIsTestEnded, selectTimerId, selectedQuestionNumber, selectAnswerCollector} from "@ducks/mainReducer/reselect.js"
+import {setIsTestStarted, setIsTestEnded, setTimerId, setQuestionNumber, setAnswerCollector, resetAnswerCollector,
+  setCompletedTests} from "@ducks/mainReducer";
+import {selectIsTestStarted, selectIsTestEnded, selectTimerId, selectedQuestionNumber, selectAnswerCollector,
+  selectCompletedTests} from "@ducks/mainReducer/reselect.js"
 
 import Heading from "@components/Heading";
 import TestStartPage from "@components/TestStartPage";
@@ -51,8 +53,10 @@ export class TestContainer extends Component {
 
     // console.log(this.props.isTestEnded);
 
+    this.props.setCompletedTests(this.props.test.name);
     this.props.setIsTestEnded(true);
-    // console.log(this.props.isTestEnded);
+    console.log(this.props.completedTests);
+    console.log(this.props.isTestEnded);
 
   };
 
@@ -69,8 +73,24 @@ export class TestContainer extends Component {
     if (!this.props.isTestStarted) return;
     // if (!this.state.startTest) return;
     // if (this.state.endTest) return;
-    if (this.props.isTestEnded) return;
+    if (this.props.isTestEnded) 
+    {    this.props.setIsTestEnded(false);
+      this.props.setIsTestStarted(false);
+
+      return;}
+
+
+    // this.endTest();
     localStorage[`${this.props.test.name}`] = this.props.answerCollector;
+    this.props.setCompletedTests(this.props.test.name);
+
+
+
+    // this.props.setIsTestEnded(false);
+    // this.props.setIsTestStarted(false);
+    // this.props.setQuestionNumber(0);
+    // this.props.resetAnswerCollector();  
+
   }
 
   render() {
@@ -97,7 +117,10 @@ const mapStoreToProps = store => ({
   isTestEnded: selectIsTestEnded(store),
   timerId: selectTimerId(store),
   questionNumber: selectedQuestionNumber(store),
-  answerCollector: selectAnswerCollector(store)
+  answerCollector: selectAnswerCollector(store),
+  completedTests: selectCompletedTests(store)
+
+
 
 });
 
@@ -108,7 +131,8 @@ const mapDispatchToProps = dispatch => {
     setTimerId: data => dispatch(setTimerId(data)),
     setQuestionNumber: data => dispatch(setQuestionNumber(data)),
     setAnswerCollector: data => dispatch(setAnswerCollector(data)),
-    resetAnswerCollector: () => dispatch(resetAnswerCollector())
+    resetAnswerCollector: () => dispatch(resetAnswerCollector()),
+    setCompletedTests: data => dispatch(setCompletedTests(data))
 
   };
 };

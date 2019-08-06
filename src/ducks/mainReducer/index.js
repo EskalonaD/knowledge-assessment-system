@@ -13,7 +13,8 @@ export const initialState = { //initialState should be placed before constances?
   isTestEnded: false,
   questionNumber: 0,
   timerId: null,
-  answerCollector: []
+  answerCollector: [],
+  completedTests: {}
   // matchedDataForStatistic: ``
 };
 
@@ -30,6 +31,7 @@ const SET_QUESTION_NUMBER= "SET_QUESTION_NUMBER";
 const SET_TIMER_ID = "SET_TIMER_ID";
 const SET_ANSWER_COLLECTOR = "SET_ANSWER_COLLECTOR";
 const RESET_ANSWER_COLLECTOR = "RESET_ANSWER_COLLECTOR";
+const SET_COMPLETED_TESTS = "SET_COMPLETED_TESTS";
 
 
 
@@ -47,7 +49,8 @@ export const setIsTestEnded = data => ({type: SET_IS_TEST_ENDED, payload: data})
 export const setQuestionNumber = data => ({type: SET_QUESTION_NUMBER, payload: data});
 export const setTimerId = data => ({type: SET_TIMER_ID, payload: data});
 export const setAnswerCollector = data => ({type: SET_ANSWER_COLLECTOR, payload: data});
-export const resetAnswerCollector = () => ({type: RESET_ANSWER_COLLECTOR})
+export const resetAnswerCollector = () => ({type: RESET_ANSWER_COLLECTOR});
+export const setCompletedTests = (data) => ({type: SET_COMPLETED_TESTS, payload: data})
 
 // reducer
 export default function commonReducer(state = initialState, action) {
@@ -111,6 +114,11 @@ export default function commonReducer(state = initialState, action) {
             return {
               ...state,
               answerCollector: []
+            };
+        case SET_COMPLETED_TESTS:
+            return {
+              ...state,
+              completedTests: {...state.completedTests, [action.payload]: true}
             };
       
       default:

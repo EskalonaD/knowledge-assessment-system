@@ -49,13 +49,15 @@ export class Tests extends Component {
   // }
 
 
-  // Return state to initial value after click on "Тесты" in menu;
+  // // Return state to initial value after click on "Тесты" in menu;
   componentDidUpdate(prevProps) {
     if (
       this.props.selectedTestNumber === prevProps.selectedTestNumber 
       && prevProps.selectedTestNumber !== null
-    )
+    ) 
+    // debugger;
       this.props.setSelectedTest(null)
+      // this.props.set
   }
 
   // TODO remove!!!!!
@@ -128,6 +130,7 @@ const mapDispatchToProps = dispatch => {
     setSelectedTest: data => dispatch(setSelectedTest(data)),
     setSearchedStr: data => dispatch(setSearchedStr(data)),
     setSortedType: data => dispatch(setSortedType(data))
+    
   };
 };
 

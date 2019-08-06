@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class Statistic extends Component {
   render() {
     const { name, rightAnswers } = this.props.test;
-
+// debugger;
     //this process should be on backend, but...
     const result = rightAnswers
     .map((el, i) => (String(el) === localStorage[name].split(`,`)[i] ? 1 : 0))

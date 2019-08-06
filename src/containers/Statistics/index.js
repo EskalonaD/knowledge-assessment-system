@@ -27,7 +27,7 @@ const sortLib = {
   time: `Времени`,
   questions: `Количеству вопросов`,
   name: `Названию`, //fix it... put additional data in store???
-  statistic: `Статистике`,
+  // statistic: `Статистике`,
   reset: `Отменить сортировку`
 };
 

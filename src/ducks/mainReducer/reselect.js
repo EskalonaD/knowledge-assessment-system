@@ -61,9 +61,11 @@ export const selectSortedDataForTests = createSelector(
   (sortedType, searchedData) => {
     return [...searchedData].sort((a, b) => {
       if (sortedType === `resetSortedType`) return 0;
-
+      
       const firstItem = a[sortedType];
       const secondItem = b[sortedType];
+      
+      if (sortedType === `name`) return firstItem < secondItem ? -1 : 1;
 
       return sortedType === `questions`
         ? firstItem.length - secondItem.length
@@ -81,6 +83,8 @@ export const selectSortedDataForStatistic = createSelector(
 
       const firstItem = a[sortedType];
       const secondItem = b[sortedType];
+
+      if (sortedType === `name`) return firstItem < secondItem ? -1 : 1;
 
       return sortedType === `questions`
         ? firstItem.length - secondItem.length

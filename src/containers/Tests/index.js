@@ -87,7 +87,7 @@ export class Tests extends Component {
         )}
         {selectedTestNumber === null && 
         <section>
-          {Array.from({ length: Math.floor(sortedData.length / 10) || 1 }).map(
+          {Array.from({ length: Math.ceil(sortedData.length / maxItemOnPage) || 1 }).map(
             (el, i) => (
               <Pagination
                 number={i + 1}

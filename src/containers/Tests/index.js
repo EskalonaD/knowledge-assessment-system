@@ -31,7 +31,8 @@ const sortLib = {
 };
 export class Tests extends Component {
   state = {
-    paginationNumber: 1
+    paginationNumber: 1,
+    maxItemOnPage: 30
   };
 
   searchHandler = str => this.props.setSearchedStr(str);
@@ -56,7 +57,7 @@ export class Tests extends Component {
 
   render() {
     const { selectedTestNumber, selectedTest, sortedData } = this.props;
-    const { paginationNumber } = this.state;
+    const { paginationNumber, maxItemOnPage } = this.state;
     // console.log(sortedData);
     return (
       <main>
@@ -68,7 +69,7 @@ export class Tests extends Component {
         {selectedTestNumber === null ? (
           <div className={styles.test_container}>
             {sortedData
-              .slice((paginationNumber - 1) * 10, paginationNumber * 10)
+              .slice((paginationNumber - 1) * maxItemOnPage, paginationNumber * maxItemOnPage)
               // .filter(
               //   (el, i) =>
               //     i < paginationNumber * 10 && i + 11 > paginationNumber * 10
@@ -84,20 +85,9 @@ export class Tests extends Component {
         ) : (
           <TestContainer test={selectedTest} />
         )}
+        {selectedTestNumber === null && 
         <section>
-          {/* {sortedData.map((el, i) => {
-            if (i % 10 === 0)
-              return (
-                <Pagination
-                  number={i / 10 + 1}
-                  handler={() => {
-                    console.log(this.state);
-                    this.setState({ paginationNumber: i / 10 + 1 });
-                  }}
-                />
-              );
-          })} */}
-          {Array.from({ length: Math.floor(sortedData.length / 10) }).map(
+          {Array.from({ length: Math.floor(sortedData.length / 10) || 1 }).map(
             (el, i) => (
               <Pagination
                 number={i + 1}
@@ -108,7 +98,7 @@ export class Tests extends Component {
               />
             )
           )}
-        </section>
+        </section>}
       </main>
     );
   }

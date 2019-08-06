@@ -1,11 +1,6 @@
 import React, { Component } from "react";
 import styles from "./index.scss";
 import { connect } from "react-redux";
-
-import ToolsContainer from "@containers/ToolsContainer";
-import Card from "@components/Card";
-import Statistic from "@components/Statistic";
-import data from "../../dataBase/test.json"; //remove???
 import {
   setSelectedStatistic,
   setSearchedStrForStatistic,
@@ -20,6 +15,14 @@ import {
   selectSortedDataForStatistic
 } from "@ducks/mainReducer/reselect.js";
 
+import ToolsContainer from "@containers/ToolsContainer";
+import Card from "@components/Card";
+import Statistic from "@components/Statistic";
+import data from "../../dataBase/test.json"; //remove???
+import Pagination from "@components/Pagination";
+
+
+
 const sortLib = {
   time: `Времени`,
   questions: `Количеству вопросов`,
@@ -29,6 +32,11 @@ const sortLib = {
 };
 
 export class Statistics extends Component {
+state ={
+  paginationNumber: 1,
+  maxItemOnPage: 30
+}
+
   searchHandler = str => this.props.setSearchedStrForStatistic(str);
 
   componentDidMount() {
@@ -46,6 +54,8 @@ export class Statistics extends Component {
       matchedDataForStatistic,
       sortedDataForStatistic
     } = this.props;
+    const { paginationNumber, maxItemOnPage } = this.state;
+
 
     return (
       <main>
@@ -56,7 +66,9 @@ export class Statistics extends Component {
         />
         {selectedStatistic === null ? (
           <div className={styles.cards_container}>
-            {sortedDataForStatistic.map(el => (
+            {sortedDataForStatistic
+                          .slice((paginationNumber - 1) * maxItemOnPage, paginationNumber * maxItemOnPage)
+            .map(el => (
               <Card
                 content={el.name}
                 handler={() => setSelectedStatistic(el.name)}
@@ -66,6 +78,20 @@ export class Statistics extends Component {
         ) : (
           <Statistic test={data.find(el => el.name === selectedStatistic)} />
         )}
+                {selectedStatistic === null && 
+        <section>
+          {Array.from({ length: Math.floor(sortedDataForStatistic.length / 10) || 1 }).map(
+            (el, i) => (
+              <Pagination
+                number={i + 1}
+                handler={() => {
+                  console.log(this.state);
+                  this.setState({ paginationNumber: i + 1 });
+                }}
+              />
+            )
+          )}
+        </section>}
       </main>
     );
   }

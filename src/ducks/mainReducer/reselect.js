@@ -93,3 +93,38 @@ export const selectSelectedStatistic = createSelector(
   main,
   ({selectedStatistic}) => selectedStatistic
 )
+
+export const selectIsTestStarted = createSelector(
+  main,
+  ({isTestStarted}) => isTestStarted
+)
+
+export const selectIsTestEnded = createSelector(
+  main,
+  ({isTestEnded}) => isTestEnded
+)
+
+export const selectedQuestionNumber = createSelector(
+  main,
+  ({questionNumber}) => questionNumber
+)
+
+export const selectTimerId = createSelector(
+  main,
+  ({timerId}) => timerId
+)
+
+export const selectAnswerCollector = createSelector(
+  main,
+  ({answerCollector}) => answerCollector
+)
+
+// export const selectTimerStart = createSelector(
+//     () => {
+//       const timer = setTimeout(this.endTest, min * 60 * 100);
+//   // this.props.setTimerId(timer);
+//   selectTimerId(timer);
+// }
+  
+// )
+

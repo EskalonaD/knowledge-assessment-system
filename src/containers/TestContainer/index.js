@@ -8,7 +8,7 @@ import {selectIsTestStarted, selectIsTestEnded, selectTimerId, selectedQuestionN
 
 import Heading from "@components/Heading";
 import TestStartPage from "@components/TestStartPage";
-import Test from "@containers/Test"; // check if its component should be in @comnponents/
+import Test from "@components/Test"; // check if its component should be in @comnponents/
 import Statistic from "@components/Statistic";
 
 export class TestContainer extends Component {

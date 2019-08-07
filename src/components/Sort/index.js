@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import styles from "./index.scss"
+
 export default class Sort extends Component {
   handleChange = e => this.props.handler(e.target.value);
 
@@ -10,8 +12,8 @@ export default class Sort extends Component {
 
   render() {
     return (
-      <section>
-        <select defaultValue="default" onChange={this.handleChange}>
+      <section className={this.props.className}>
+        <select defaultValue="default" onChange={this.handleChange} >
           <option disabled value="default">
             Сортировать по:
           </option>

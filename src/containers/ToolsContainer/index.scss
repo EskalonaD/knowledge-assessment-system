@@ -1,4 +1,9 @@
 .tools_container {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+}
+
+.tools {
+  margin-left: 50px;
+  // height: 30px;
 }

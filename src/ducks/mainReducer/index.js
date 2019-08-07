@@ -14,7 +14,8 @@ export const initialState = { //initialState should be placed before constances?
   questionNumber: 0,
   timerId: null,
   answerCollector: [],
-  completedTests: {}
+  completedTests: {},
+  sliderTranslateValue: 0
   // matchedDataForStatistic: ``
 };
 
@@ -32,6 +33,7 @@ const SET_TIMER_ID = "SET_TIMER_ID";
 const SET_ANSWER_COLLECTOR = "SET_ANSWER_COLLECTOR";
 const RESET_ANSWER_COLLECTOR = "RESET_ANSWER_COLLECTOR";
 const SET_COMPLETED_TESTS = "SET_COMPLETED_TESTS";
+const SET_SLIDER_TRANSLATE_VALUE = "SET_SLIDER_TRANSLATE_VALUE";
 
 
 
@@ -51,6 +53,7 @@ export const setTimerId = data => ({type: SET_TIMER_ID, payload: data});
 export const setAnswerCollector = data => ({type: SET_ANSWER_COLLECTOR, payload: data});
 export const resetAnswerCollector = () => ({type: RESET_ANSWER_COLLECTOR});
 export const setCompletedTests = (data) => ({type: SET_COMPLETED_TESTS, payload: data})
+export const setSliderTranslateValue = (data) => ({type: SET_SLIDER_TRANSLATE_VALUE, payload: data})
 
 // reducer
 export default function commonReducer(state = initialState, action) {
@@ -119,6 +122,11 @@ export default function commonReducer(state = initialState, action) {
             return {
               ...state,
               completedTests: {...state.completedTests, [action.payload]: true}
+            };
+        case SET_SLIDER_TRANSLATE_VALUE:
+            return {
+              ...state,
+              sliderTranslateValue: action.payload
             };
       
       default:

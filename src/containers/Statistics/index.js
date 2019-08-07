@@ -34,7 +34,7 @@ const sortLib = {
 export class Statistics extends Component {
 state ={
   paginationNumber: 1,
-  maxItemOnPage: 30
+  maxItemOnPage: 5
 }
 
   searchHandler = str => this.props.setSearchedStrForStatistic(str);
@@ -64,7 +64,7 @@ state ={
     } = this.props;
     const { paginationNumber, maxItemOnPage } = this.state;
 
-
+    const matchedData = sortedDataForStatistic.filter(el => Object.keys(localStorage).some(item => item === el.name))
     return (
       <main>
         <ToolsContainer
@@ -72,10 +72,23 @@ state ={
           sortHandler={val => this.props.setSortedTypeForStatistic(val)}
           sortData={sortLib}
         />
+        {selectedStatistic === null && 
+          <section>
+            {Array.from({ length: Math.ceil(matchedData.length / maxItemOnPage) || 1 }).map(
+              (el, i) => (
+                <Pagination
+                  number={i + 1}
+                  handler={() => {
+                    console.log(this.state);
+                    this.setState({ paginationNumber: i + 1 });
+                  }}
+                />
+              )
+            )}
+          </section>}
         {selectedStatistic === null ? (
           <div className={styles.cards_container}>
-            {sortedDataForStatistic
-            .filter(el => Object.keys(localStorage).some(item => item === el.name))
+            {matchedData
                           .slice((paginationNumber - 1) * maxItemOnPage, paginationNumber * maxItemOnPage)
             .map(el => (
               <Card
@@ -87,20 +100,7 @@ state ={
         ) : (
           <Statistic test={data.find(el => el.name === selectedStatistic)} />
         )}
-                {selectedStatistic === null && 
-        <section>
-          {Array.from({ length: Math.floor(sortedDataForStatistic.length / 10) || 1 }).map(
-            (el, i) => (
-              <Pagination
-                number={i + 1}
-                handler={() => {
-                  console.log(this.state);
-                  this.setState({ paginationNumber: i + 1 });
-                }}
-              />
-            )
-          )}
-        </section>}
+                
       </main>
     );
   }

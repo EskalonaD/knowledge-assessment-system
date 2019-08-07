@@ -3,5 +3,20 @@
 }
 
 .slider__wrapper {
-  height: 150px;
+  height: 15vh;
+
+  overflow: hidden;
+}
+.slider {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+img {
+  height: 15vh;
+  width: 30vw;
+  object-fit: cover;
+  margin-right: 5vw;
+  // transform: translateX(-35vw);
+  // transition: transform 1s;
 }

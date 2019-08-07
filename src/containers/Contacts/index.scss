@@ -1,0 +1,23 @@
+// main {
+//     height: 64vh;
+//     overflow-y: auto;
+//     background-color: #fff;
+// }
+
+.map-container {
+    width: 75%;
+    // display: inline-block;
+    margin: 5px;
+    margin-right: 15px;
+    height: 1000px;
+}
+
+.contacts {
+    font-size: 1.1em;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+

@@ -1,11 +1,9 @@
-*{
-  border: 0.1px solid #000;
-}
 
 .slider__wrapper {
   height: 15vh;
 
   overflow: hidden;
+  border-bottom: 5px solid #004c40;
 }
 .slider {
   display: flex;

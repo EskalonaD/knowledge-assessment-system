@@ -6,7 +6,7 @@ export default class Search extends Component {
 
   render() {
     return (
-      <section>
+      <section className={this.props.className}>
         <input
           type="text"
           className={styles.input}

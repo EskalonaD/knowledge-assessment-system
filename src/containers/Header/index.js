@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./index.scss";
 
-import Menu from "@components/Menu";
+import Menu from "@containers/Menu";
 import Heading from "@components/Heading";
 
 export default class Header extends Component {

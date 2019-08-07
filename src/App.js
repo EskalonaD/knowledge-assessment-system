@@ -9,6 +9,8 @@ import Tests from "@containers/Tests";
 import Contacts from "@containers/Contacts";
 import Statistics from "@containers/Statistics";
 import Footer from "@containers/Footer";
+import About from "@containers/About"
+import Login from "@containers/Login"
 
 export default class App extends Component {
   render() {
@@ -19,8 +21,10 @@ export default class App extends Component {
         <Switch>
           <Route exact path="/" component={MainPage} />
           <Route exact path="/tests" component={Tests} />
-          <Route exact path="/contacts" component={Contacts} />
           <Route exact path="/statistics" component={Statistics} />
+          <Route exact path="/contacts" component={Contacts} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/login" component={Login} />
         </Switch>
         <Footer />
       </Router>

@@ -4,14 +4,14 @@ import ToolsContainer from "@containers/ToolsContainer";
 export default class MainPage extends Component {
   render() {
     return (
-      <main>
-        Приветствуем вас на нашем сайте.
+      <main className={styles.mainWrapper}>
+        <div className={styles.pseudoHeader}>Приветствуем вас на нашем сайте.</div>
 
-Здесь вы проверите ваши знания в режиме реального времени. 
+<div className={styles.text}>Здесь вы проверите ваши знания в режиме реального времени. </div>
  
-Если готовы и уверены – ПРИСТУПАЙТЕ.
+<div className={styles.text}>Если готовы и уверены – ПРИСТУПАЙТЕ.
 
-УДАЧИ
+УДАЧИ</div>
       </main>
     );
   }

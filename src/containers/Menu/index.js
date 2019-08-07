@@ -15,9 +15,10 @@ const MENU_LIST = [
 export default class Menu extends Component {
   render() {
     const { menuContainer, menuButton, menuButtonActive } = styles;
+    // console.log(getComputedStyle(document.querySelector(`main`)).width)
     return (
       <nav>
-        <button className={styles.mobile_menuToggle}></button>
+        {/* <button className={styles.mobile_menuToggle}>Меню</button> */}
         <ul className={menuContainer}>
           {MENU_LIST.map((el, i) => {
             if(i !== MENU_LIST.length - 1 ){

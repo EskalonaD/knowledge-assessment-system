@@ -1,5 +1,19 @@
-main {
-    height: 64vh;
-    overflow-y: auto;
-    background-color: #fff;
+// main {
+//     height: 64vh;
+//     overflow-y: auto;
+//     background-color: #fff;
+// }
+
+.map-container {
+    width: 100%;
+    // display: inline-block;
+    margin: 5px;
+    margin-right: 15px;
+}
+
+// .contacts {
+//     // display: inline-block;
+// }
+.container {
+    display: flex;
 }

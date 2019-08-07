@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, compose } from "redux";
+import { createStore, compose } from "redux";
 import commonReducer, { initialState } from "../ducks/mainReducer";
 
 export default createStore(

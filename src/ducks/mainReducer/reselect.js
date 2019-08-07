@@ -4,7 +4,7 @@ const main = state => state;
 
 export const selectData = createSelector(
   main,
-  ({ data }) => data || [] //
+  ({ data }) => data || []
 );
 
 export const selectTestNumber = createSelector(
@@ -25,10 +25,10 @@ export const selectSearchedStr = createSelector(
 
 export const selectSearchedStrForStatistic = createSelector(
   main,
-  ({searchedStrForStatistic}) => searchedStrForStatistic
-)
+  ({ searchedStrForStatistic }) => searchedStrForStatistic
+);
 
-export const selectSearcheDataForTests= createSelector(
+export const selectSearcheDataForTests = createSelector(
   selectData,
   selectSearchedStr,
   (data, searchedStr) => data.filter(el => el.name.includes(searchedStr))
@@ -38,7 +38,7 @@ export const selectSearchedDataForStatistic = createSelector(
   selectData,
   selectSearchedStrForStatistic,
   (data, searchedStr) => data.filter(el => el.name.includes(searchedStr))
-)
+);
 
 export const selectSortedType = createSelector(
   main,
@@ -47,13 +47,8 @@ export const selectSortedType = createSelector(
 
 export const selectSortedTypeForStatistic = createSelector(
   main,
-  ({sortedTypeForStatistic}) => sortedTypeForStatistic
-)
-
-// export const selectMatchedDataForStatistic = createSelector(
-//   selectSearchedDataForStatistic,
-//   (data) => data.filter(el => Object.keys(localStorage).some(item => item === el.name))
-// )
+  ({ sortedTypeForStatistic }) => sortedTypeForStatistic
+);
 
 export const selectSortedDataForTests = createSelector(
   selectSortedType,
@@ -61,10 +56,10 @@ export const selectSortedDataForTests = createSelector(
   (sortedType, searchedData) => {
     return [...searchedData].sort((a, b) => {
       if (sortedType === `resetSortedType`) return 0;
-      
+
       const firstItem = a[sortedType];
       const secondItem = b[sortedType];
-      
+
       if (sortedType === `name`) return firstItem < secondItem ? -1 : 1;
 
       return sortedType === `questions`
@@ -91,53 +86,44 @@ export const selectSortedDataForStatistic = createSelector(
         : firstItem - secondItem;
     });
   }
-)
+);
 
 export const selectSelectedStatistic = createSelector(
   main,
-  ({selectedStatistic}) => selectedStatistic
-)
+  ({ selectedStatistic }) => selectedStatistic
+);
 
 export const selectIsTestStarted = createSelector(
   main,
-  ({isTestStarted}) => isTestStarted
-)
+  ({ isTestStarted }) => isTestStarted
+);
 
 export const selectIsTestEnded = createSelector(
   main,
-  ({isTestEnded}) => isTestEnded
-)
+  ({ isTestEnded }) => isTestEnded
+);
 
 export const selectedQuestionNumber = createSelector(
   main,
-  ({questionNumber}) => questionNumber
-)
+  ({ questionNumber }) => questionNumber
+);
 
 export const selectTimerId = createSelector(
   main,
-  ({timerId}) => timerId
-)
+  ({ timerId }) => timerId
+);
 
 export const selectAnswerCollector = createSelector(
   main,
-  ({answerCollector}) => answerCollector
-)
+  ({ answerCollector }) => answerCollector
+);
 
 export const selectCompletedTests = createSelector(
   main,
-  ({completedTests}) => completedTests
-)
+  ({ completedTests }) => completedTests
+);
 
 export const selectSliderTranslateValue = createSelector(
   main,
-  ({sliderTranslateValue}) => sliderTranslateValue
-)
-// export const selectTimerStart = createSelector(
-//     () => {
-//       const timer = setTimeout(this.endTest, min * 60 * 100);
-//   // this.props.setTimerId(timer);
-//   selectTimerId(timer);
-// }
-  
-// )
-
+  ({ sliderTranslateValue }) => sliderTranslateValue
+);

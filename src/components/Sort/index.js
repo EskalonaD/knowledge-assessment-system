@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-import styles from "./index.scss";
-
 export default class Sort extends Component {
   handleChange = e => this.props.handler(e.target.value);
 

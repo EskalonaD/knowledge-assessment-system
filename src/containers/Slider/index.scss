@@ -10,11 +10,9 @@
   flex-wrap: nowrap;
 }
 
-img {
+.img {
   height: 15vh;
   width: 30vw;
   object-fit: cover;
   margin-right: 5vw;
-  // transform: translateX(-35vw);
-  // transition: transform 1s;
 }

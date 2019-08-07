@@ -20,8 +20,6 @@ import TestContainer from "@containers/TestContainer";
 import Card from "@components/Card";
 import Pagination from "@components/Pagination";
 
-// TODO  remove useless imports /// change sorted data to data /// move serachHandler to reselect
-
 // TODO decrease//increase
 const sortLib = {
   time: `Времени`,
@@ -38,25 +36,12 @@ export class Tests extends Component {
   searchHandler = str => this.props.setSearchedStr(str);
 
   // Return state to initial value after click on "Тесты" in menu;
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (
-  //     this.state.selectedTest === prevState.selectedTest &&
-  //     prevState.selectedTest !== null
-  //   )
-  //     this.setState({
-  //       selectedTest: null
-  //     });
-  // }
-
-  // // Return state to initial value after click on "Тесты" in menu;
   componentDidUpdate(prevProps) {
     if (
       this.props.selectedTestNumber === prevProps.selectedTestNumber &&
       prevProps.selectedTestNumber !== null
     )
-      // debugger;
       this.props.setSelectedTest(null);
-    // this.props.set
   }
 
   // TODO remove!!!!!
@@ -116,7 +101,6 @@ export class Tests extends Component {
 }
 
 const mapStoreToProps = store => ({
-  // data: selectData(store),
   selectedTestNumber: selectTestNumber(store),
   selectedTest: selectTest(store),
   searchedStr: selectSearchedStr(store),

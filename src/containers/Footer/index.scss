@@ -1,6 +1,6 @@
 
 
-a {
+.a {
   text-decoration: none;
   color: inherit;
 }
@@ -10,12 +10,14 @@ a {
   bottom: 0;
   height: 50px;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
+  // margin: auto;
   width: 100%;
   background-color: #48a999;
-  &__block {
-    padding: 15px;
-    // background-color: #64ffda;
-    color: #fff;
-  }
+  // &__block {
+  //   padding: 15px;
+  //   // background-color: #64ffda;
+  //   color: #fff;
+  // }
 }

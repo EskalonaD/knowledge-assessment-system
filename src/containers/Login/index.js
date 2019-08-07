@@ -5,7 +5,7 @@ export default class Login extends Component {
   render() {
     return (
       <main>
-        К сожалению данный раздел пока недоступен. 
+        *К сожалению данный раздел пока недоступен. 
       </main>
     );
   }

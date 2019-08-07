@@ -5,15 +5,19 @@
 // }
 
 .map-container {
-    width: 100%;
+    width: 75%;
     // display: inline-block;
     margin: 5px;
     margin-right: 15px;
+    height: 1000px;
 }
 
-// .contacts {
-//     // display: inline-block;
-// }
+.contacts {
+    font-size: 1.1em;
+}
 .container {
     display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+

@@ -13,7 +13,6 @@ export default class Search extends Component {
           onKeyUp={this.handlerKeyUp}
           placeholder="Поиск"
         />
-        {/* icon for search?*/}
       </section>
     );
   }

@@ -15,34 +15,38 @@ const MENU_LIST = [
 export default class Menu extends Component {
   render() {
     const { menuContainer, menuButton, menuButtonActive } = styles;
-    // console.log(getComputedStyle(document.querySelector(`main`)).width)
+
     return (
       <nav>
-        {/* <button className={styles.mobile_menuToggle}>Меню</button> */}
+        <button className={styles.mobile_menuToggle}>Меню</button>
         <ul className={menuContainer}>
           {MENU_LIST.map((el, i) => {
-            if(i !== MENU_LIST.length - 1 ){
-            return (<React.Fragment><NavLink
-              key={el.name}
-              to={el.url}
-              className={menuButton}
-              activeClassName={el.url === "/" ? `` : menuButtonActive}
-            >
-              {el.name}
-            </NavLink><div className={styles.separator}></div></React.Fragment>)
+            if (i !== MENU_LIST.length - 1) {
+              return (
+                <React.Fragment key={el.name}>
+                  <NavLink
+                    to={el.url}
+                    className={styles.menuButton}
+                    activeClassName={el.url === "/" ? `` : menuButtonActive}
+                  >
+                    {el.name}
+                  </NavLink>
+                  <div className={styles.separator} />
+                </React.Fragment>
+              );
             } else {
-              return (<NavLink
-                key={el.name}
-                to={el.url}
-                className={menuButton}
-
-                activeClassName={el.url === "/" ? `` : menuButtonActive}
-              >
-                {el.name}
-              </NavLink>)
+              return (
+                <NavLink
+                  key={el.name}
+                  to={el.url}
+                  className={menuButton}
+                  activeClassName={el.url === "/" ? `` : menuButtonActive}
+                >
+                  {el.name}
+                </NavLink>
+              );
             }
-          }
-          )}
+          })}
         </ul>
       </nav>
     );

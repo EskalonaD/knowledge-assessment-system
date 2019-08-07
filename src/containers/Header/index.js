@@ -15,5 +15,3 @@ export default class Header extends Component {
     );
   }
 }
-
-// Knowledge Examinator

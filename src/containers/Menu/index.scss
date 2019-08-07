@@ -69,29 +69,23 @@ nav {
 //   // font-family: monospace;
 // }
 
-// .mobile_menuToggle {
-//   display: none;
-// }
+.mobile_menuToggle {
+  display: none;
+}
 
+@media screen and (min-width: 320px) and (max-width: 700px) {
 
-// @media screen and (min-width: 320px) and (max-width: 640) {
-//   .mobile_menuToggle {
-//     display: block;
-//     background-color: #fff;
-//     width: 13vw;
-//     // height: 36px;
-//     height: 4vh;     /* mb remove later "На главную" is falled out */
-//     line-height: 3.9vh;
-//     // width: 70px;
-//     // padding: 10px;
-//     padding: 1.3vh;
-//     font-size: 2.02vh;
-//     text-align: center;
-//     text-decoration: none;
-//     color: #000;
-//   }
-//   .menu-button {
-//     display: none;
-//   }
-// }
+  .menu-button {
+    height: 7vh;
+    flex-basis: 18%;
+    border: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+  .separator {
+    display: none;
+  }
+}
 

@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import styles from "./index.scss";
+
 import Heading from "@components/Heading";
 
 export default class Test extends Component {
@@ -27,21 +29,24 @@ export default class Test extends Component {
     const { answer } = this.state;
 
     return (
-      <section>
+      <section className={styles.testWrapper}>
         <Heading hNumber="3" content={task.question} />
-        {task.possibleAnswers.map((el, i) => (
-          <label>
-            <input
-              type="radio"
-              checked={answer === i}
-              name={`answer`}
-              value={i}
-              onChange={() => this.handleChange(i)}
-            />
-            {/* Switch inputs to Card component???*/}
-            {el}
-          </label>
-        ))}
+        <div className={styles.testContainer}>
+          {task.possibleAnswers.map((el, i) => (
+            <label className={styles.testCard}>
+              <input
+                type="radio"
+                checked={answer === i}
+                name={`answer`}
+                value={i}
+                onChange={() => this.handleChange(i)}
+                className={styles.input}
+              />
+              {/* Switch inputs to Card component???*/}
+              {el}
+            </label>
+          ))}
+        </div>
         <button onClick={() => this.handleClick(answer)}>
           Следующий вопрос
         </button>

@@ -3,15 +3,16 @@ main {
     height: 64vh;
     overflow-y: auto;
     background-color: #fff;
-    padding-bottom: 55px;
     box-sizing: border-box;
     padding: 0 15px;
-}
+    padding-bottom: 55px;
+  }
 
 .main-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
+    // justify-content: center;
 }
 
 .pseudo-header {
@@ -24,4 +25,12 @@ main {
 .text {
     font-size: 1.3em;
     line-height: 5vh;
+}
+
+
+@media screen and (min-width: 320px) and (max-width: 700px){
+  .main-wrapper {
+
+    justify-content: center;
+}
 }

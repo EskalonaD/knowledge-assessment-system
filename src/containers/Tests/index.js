@@ -48,16 +48,15 @@ export class Tests extends Component {
   //     });
   // }
 
-
   // // Return state to initial value after click on "Тесты" in menu;
   componentDidUpdate(prevProps) {
     if (
-      this.props.selectedTestNumber === prevProps.selectedTestNumber 
-      && prevProps.selectedTestNumber !== null
-    ) 
-    // debugger;
-      this.props.setSelectedTest(null)
-      // this.props.set
+      this.props.selectedTestNumber === prevProps.selectedTestNumber &&
+      prevProps.selectedTestNumber !== null
+    )
+      // debugger;
+      this.props.setSelectedTest(null);
+    // this.props.set
   }
 
   // TODO remove!!!!!
@@ -70,7 +69,7 @@ export class Tests extends Component {
   render() {
     const { selectedTestNumber, selectedTest, sortedData } = this.props;
     const { paginationNumber, maxItemOnPage } = this.state;
-    // console.log(sortedData);
+
     return (
       <main>
         <ToolsContainer
@@ -78,41 +77,39 @@ export class Tests extends Component {
           sortData={sortLib}
           sortHandler={val => this.props.setSortedType(val)}
         />
-        {selectedTestNumber === null && 
-        <section>
-          {Array.from({ length: Math.ceil(sortedData.length / maxItemOnPage) || 1 }).map(
-            (el, i) => (
+        {selectedTestNumber === null && (
+          <section>
+            {Array.from({
+              length: Math.ceil(sortedData.length / maxItemOnPage) || 1
+            }).map((el, i) => (
               <Pagination
+                key={i}
                 number={i + 1}
                 handler={() => {
-                  console.log(this.state);
                   this.setState({ paginationNumber: i + 1 });
                 }}
               />
-            )
-          )}
-        </section>}
+            ))}
+          </section>
+        )}
         {selectedTestNumber === null ? (
           <div className={styles.test_container}>
             {sortedData
-              .slice((paginationNumber - 1) * maxItemOnPage, paginationNumber * maxItemOnPage)
-              // .filter(
-              //   (el, i) =>
-              //     i < paginationNumber * 10 && i + 11 > paginationNumber * 10
-              // )
+              .slice(
+                (paginationNumber - 1) * maxItemOnPage,
+                paginationNumber * maxItemOnPage
+              )
               .map((el, i) => (
                 <Card
                   key={el.name}
                   handler={() => this.props.setSelectedTest(i)}
                   content={el.name}
-                  // className={styles.testCards}
                 />
               ))}
           </div>
         ) : (
           <TestContainer test={selectedTest} />
         )}
-        
       </main>
     );
   }
@@ -132,7 +129,6 @@ const mapDispatchToProps = dispatch => {
     setSelectedTest: data => dispatch(setSelectedTest(data)),
     setSearchedStr: data => dispatch(setSearchedStr(data)),
     setSortedType: data => dispatch(setSortedType(data))
-    
   };
 };
 

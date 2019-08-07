@@ -1,10 +1,23 @@
 import React, { Component } from "react";
 import styles from "./index.scss";
-import {connect} from "react-redux";
-import {setIsTestStarted, setIsTestEnded, setTimerId, setQuestionNumber, setAnswerCollector, resetAnswerCollector,
-  setCompletedTests} from "@ducks/mainReducer";
-import {selectIsTestStarted, selectIsTestEnded, selectTimerId, selectedQuestionNumber, selectAnswerCollector,
-  selectCompletedTests} from "@ducks/mainReducer/reselect.js"
+import { connect } from "react-redux";
+import {
+  setIsTestStarted,
+  setIsTestEnded,
+  setTimerId,
+  setQuestionNumber,
+  setAnswerCollector,
+  resetAnswerCollector,
+  setCompletedTests
+} from "@ducks/mainReducer";
+import {
+  selectIsTestStarted,
+  selectIsTestEnded,
+  selectTimerId,
+  selectedQuestionNumber,
+  selectAnswerCollector,
+  selectCompletedTests
+} from "@ducks/mainReducer/reselect.js";
 
 import Heading from "@components/Heading";
 import TestStartPage from "@components/TestStartPage";
@@ -40,8 +53,8 @@ export class TestContainer extends Component {
 
     // this.state.step + 1 < this.props.test.questions.length
     this.props.questionNumber + 1 < this.props.test.questions.length
-      // ? this.setState({ step: this.state.step + 1 })
-      ? this.props.setQuestionNumber(this.props.questionNumber + 1)
+      ? // ? this.setState({ step: this.state.step + 1 })
+        this.props.setQuestionNumber(this.props.questionNumber + 1)
       : //: this.setState({endTest: true});
         this.endTest();
     // console.log(this.state.answerCollector);
@@ -57,40 +70,30 @@ export class TestContainer extends Component {
     this.props.setIsTestEnded(true);
     console.log(this.props.completedTests);
     console.log(this.props.isTestEnded);
-
   };
-
 
   componentDidMount() {
     this.props.setIsTestEnded(false);
     this.props.setIsTestStarted(false);
     this.props.setQuestionNumber(0);
-    this.props.resetAnswerCollector();  
+    this.props.resetAnswerCollector();
   }
-  
+
   componentWillUnmount() {
     clearTimeout(this.props.timerId); //change to fit `time` function\method
     if (!this.props.isTestStarted) return;
     // if (!this.state.startTest) return;
     // if (this.state.endTest) return;
-    if (this.props.isTestEnded) 
-    {    this.props.setIsTestEnded(false);
+    if (this.props.isTestEnded) {
+      this.props.setIsTestEnded(false);
       this.props.setIsTestStarted(false);
 
-      return;}
-
+      return;
+    }
 
     // this.endTest();
     localStorage[`${this.props.test.name}`] = this.props.answerCollector;
     this.props.setCompletedTests(this.props.test.name);
-
-
-
-    // this.props.setIsTestEnded(false);
-    // this.props.setIsTestStarted(false);
-    // this.props.setQuestionNumber(0);
-    // this.props.resetAnswerCollector();  
-
   }
 
   render() {
@@ -102,15 +105,17 @@ export class TestContainer extends Component {
         {isTestEnded ? (
           <Statistic test={this.props.test} />
         ) : isTestStarted ? (
-          <Test task={test.questions[questionNumber]} nextStep={this.nextStep} />
-          ) : (
-            <TestStartPage startTest={this.startTest} />
+          <Test
+            task={test.questions[questionNumber]}
+            nextStep={this.nextStep}
+          />
+        ) : (
+          <TestStartPage startTest={this.startTest} task={this.props.test} />
         )}
       </section>
     );
   }
 }
-
 
 const mapStoreToProps = store => ({
   isTestStarted: selectIsTestStarted(store),
@@ -119,9 +124,6 @@ const mapStoreToProps = store => ({
   questionNumber: selectedQuestionNumber(store),
   answerCollector: selectAnswerCollector(store),
   completedTests: selectCompletedTests(store)
-
-
-
 });
 
 const mapDispatchToProps = dispatch => {
@@ -133,7 +135,6 @@ const mapDispatchToProps = dispatch => {
     setAnswerCollector: data => dispatch(setAnswerCollector(data)),
     resetAnswerCollector: () => dispatch(resetAnswerCollector()),
     setCompletedTests: data => dispatch(setCompletedTests(data))
-
   };
 };
 

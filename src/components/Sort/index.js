@@ -1,7 +1,18 @@
 import React, { Component } from "react";
 
 export default class Sort extends Component {
-  handleChange = e => this.props.handler(e.target.value);
+  state = {
+    value: `default`
+  }
+  // handleChange = e => this.props.handler(e.target.value);
+//   handleChange = e => {
+//     this.props.handler(this.state.value);
+//     this.setState({value: e.target.value});
+// }
+
+handleChange = e => {
+  this.setState({value: e.target.value}, () => this.props.handler(this.state.value));
+}
 
   constructOptionList = () =>
     Object.entries(this.props.data).map(([key, name]) => (
@@ -13,7 +24,7 @@ export default class Sort extends Component {
   render() {
     return (
       <section className={this.props.className}>
-        <select defaultValue="default" onChange={this.handleChange}>
+        <select defaultValue={this.state.value} onChange={this.handleChange}>
           <option disabled value="default">
             Сортировать по:
           </option>

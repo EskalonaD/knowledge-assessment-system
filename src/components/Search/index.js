@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import styles from "./index.scss";
 
 export default class Search extends Component {
-  handlerKeyUp = e => this.props.handler(e.target.value);
+  state = {
+    value: ``
+  }
+
+  handlerOnChange = e => this.setState({value: e.target.value});    
+  handlerKeyUp = () => this.props.handler(this.state.value);
 
   render() {
     return (
@@ -11,7 +16,9 @@ export default class Search extends Component {
           type="text"
           className={styles.input}
           onKeyUp={this.handlerKeyUp}
+          onChange={this.handlerOnChange}
           placeholder="Поиск"
+          value={this.state.value}
         />
       </section>
     );

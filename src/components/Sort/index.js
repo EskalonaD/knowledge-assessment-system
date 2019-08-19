@@ -5,14 +5,15 @@ export default class Sort extends Component {
     value: `default`
   }
   // handleChange = e => this.props.handler(e.target.value);
-//   handleChange = e => {
-//     this.props.handler(this.state.value);
-//     this.setState({value: e.target.value});
-// }
-
-handleChange = e => {
-  this.setState({value: e.target.value}, () => this.props.handler(this.state.value));
+  handleChange = e => {
+    const eValue = e.target.value;
+    this.props.handler(eValue);
+    this.setState({value: eValue});
 }
+
+// handleChange = e => {
+//   this.setState({value: e.target.value}, () => this.props.handler(this.state.value));
+// }
 
   constructOptionList = () =>
     Object.entries(this.props.data).map(([key, name]) => (
